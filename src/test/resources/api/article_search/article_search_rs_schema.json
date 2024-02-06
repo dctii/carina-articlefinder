@@ -1,0 +1,380 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "status": {
+      "type": "string"
+    },
+    "copyright": {
+      "type": "string"
+    },
+    "response": {
+      "type": "object",
+      "properties": {
+        "docs": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "abstract": {
+                "type": "string"
+              },
+              "web_url": {
+                "type": "string"
+              },
+              "snippet": {
+                "type": "string"
+              },
+              "lead_paragraph": {
+                "type": "string"
+              },
+              "source": {
+                "type": "string"
+              },
+              "multimedia": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "rank": {
+                      "type": "integer"
+                    },
+                    "subtype": {
+                      "type": "string"
+                    },
+                    "caption": {
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "credit": {
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "type": {
+                      "type": "string"
+                    },
+                    "url": {
+                      "type": "string"
+                    },
+                    "height": {
+                      "type": "integer"
+                    },
+                    "width": {
+                      "type": "integer"
+                    },
+                    "legacy": {
+                      "type": "object",
+                      "properties": {
+                        "thumbnail": {
+                          "type": [
+                            "string",
+                            "null"
+                          ]
+                        },
+                        "thumbnailwidth": {
+                          "type": [
+                            "integer",
+                            "null"
+                          ]
+                        },
+                        "thumbnailheight": {
+                          "type": [
+                            "integer",
+                            "null"
+                          ]
+                        },
+                        "wide": {
+                          "type": [
+                            "string",
+                            "null"
+                          ]
+                        },
+                        "widewidth": {
+                          "type": [
+                            "integer",
+                            "null"
+                          ]
+                        },
+                        "wideheight": {
+                          "type": [
+                            "integer",
+                            "null"
+                          ]
+                        },
+                        "xlarge": {
+                          "type": [
+                            "string",
+                            "null"
+                          ]
+                        },
+                        "xlargewidth": {
+                          "type": [
+                            "integer",
+                            "null"
+                          ]
+                        },
+                        "xlargeheight": {
+                          "type": [
+                            "integer",
+                            "null"
+                          ]
+                        }
+                      }
+                    },
+                    "subType": {
+                      "type": "string"
+                    },
+                    "crop_name": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "rank",
+                    "subtype",
+                    "type",
+                    "url",
+                    "height",
+                    "width",
+                    "subType",
+                    "crop_name"
+                  ]
+                }
+              },
+              "headline": {
+                "type": "object",
+                "properties": {
+                  "main": {
+                    "type": "string"
+                  },
+                  "kicker": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "content_kicker": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "print_headline": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "name": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "seo": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "sub": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  }
+                }
+              },
+              "keywords": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string"
+                    },
+                    "value": {
+                      "type": "string"
+                    },
+                    "rank": {
+                      "type": "integer"
+                    },
+                    "major": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "name",
+                    "value",
+                    "rank",
+                    "major"
+                  ]
+                }
+              },
+              "pub_date": {
+                "type": "string",
+                "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}[+-][0-9]{4}$"
+              },
+              "document_type": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "news_desk": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "section_name": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "subsection_name": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "byline": {
+                "type": "object",
+                "properties": {
+                  "original": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "person": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "firstname": {
+                          "type": [
+                            "string",
+                            "null"
+                          ]
+                        },
+                        "middlename": {
+                          "type": [
+                            "string",
+                            "null"
+                          ]
+                        },
+                        "lastname": {
+                          "type": [
+                            "string",
+                            "null"
+                          ]
+                        },
+                        "qualifier": {
+                          "type": [
+                            "string",
+                            "null"
+                          ]
+                        },
+                        "title": {
+                          "type": [
+                            "string",
+                            "null"
+                          ]
+                        },
+                        "role": {
+                          "type": [
+                            "string",
+                            "null"
+                          ]
+                        },
+                        "organization": {
+                          "type": [
+                            "string",
+                            "null"
+                          ]
+                        },
+                        "rank": {
+                          "type": "integer"
+                        }
+                      }
+                    }
+                  },
+                  "organization": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  }
+                }
+              },
+              "type_of_material": {
+                "type": "string"
+              },
+              "_id": {
+                "type": "string"
+              },
+              "word_count": {
+                "type": "integer"
+              },
+              "uri": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "abstract",
+              "web_url",
+              "snippet",
+              "lead_paragraph",
+              "source",
+              "multimedia",
+              "headline",
+              "keywords",
+              "pub_date",
+              "document_type",
+              "news_desk",
+              "section_name",
+              "byline",
+              "type_of_material",
+              "_id",
+              "word_count",
+              "uri"
+            ]
+          }
+        },
+        "meta": {
+          "type": "object",
+          "properties": {
+            "hits": {
+              "type": "integer"
+            },
+            "offset": {
+              "type": "integer"
+            },
+            "time": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "hits",
+            "offset",
+            "time"
+          ]
+        }
+      },
+      "required": [
+        "docs",
+        "meta"
+      ]
+    }
+  },
+  "required": [
+    "status",
+    "copyright",
+    "response"
+  ]
+}

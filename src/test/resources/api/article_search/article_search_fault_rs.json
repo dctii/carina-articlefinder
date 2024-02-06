@@ -1,0 +1,8 @@
+{
+  "fault": {
+    "faultstring": "type:String",
+    "detail": {
+      "errorcode": "type:String"
+    }
+  }
+}

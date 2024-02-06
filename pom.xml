@@ -5,13 +5,13 @@
 >
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.solvd.weather</groupId>
-    <artifactId>weather</artifactId>
+    <groupId>com.solvd.carina.weather</groupId>
+    <artifactId>articlefinder</artifactId>
     <version>1.0.0</version>
 
     <properties>
         <!--   Project Package Name     -->
-        <self.groupId>com.solvd.weather</self.groupId>
+        <self.groupId>com.solvd.carina.articlefinder</self.groupId>
 
         <!--   Java Properties     -->
         <java.version>11</java.version>
@@ -35,10 +35,6 @@
         <!--   Apache Commons-IO Properties     -->
         <apache-commons-io.version>2.15.0</apache-commons-io.version>
 
-        <!--   JOOQ Properties     -->
-        <jooq.affix>jooq</jooq.affix>
-        <jooq.groupId>org.${jooq.affix}</jooq.groupId>
-        <jooq.version>3.15.12</jooq.version>
 
         <!--   MySQL Connector J Properties     -->
         <mysql.affix>mysql</mysql.affix>
@@ -84,6 +80,29 @@
         <log4j-slf4j2-impl.version>2.22.1</log4j-slf4j2-impl.version>
         <log4j-slf4j2-impl.scope>test</log4j-slf4j2-impl.scope>
 
+        <!--   Zebrunner Properties     -->
+        <zebrunner.affix>zebrunner</zebrunner.affix>
+        <zebrunner.groupId>com.${zebrunner.affix}</zebrunner.groupId>
+
+        <!--   Zebrunner Carina Properties     -->
+        <carina.affix>carina</carina.affix>
+        <carina.groupId>${zebrunner.groupId}</carina.groupId>
+
+        <carina-api.artifactId>${carina.affix}-api</carina-api.artifactId>
+        <carina-api.version>1.2.4</carina-api.version>
+
+        <carina-core.artifactId>${carina.affix}-core</carina-core.artifactId>
+        <carina-core.version>1.2.6</carina-core.version>
+
+        <!--    Google Properties    -->
+        <google.affix>google</google.affix>
+        <google.superGroupId>com.${google.affix}</google.superGroupId>
+
+        <!--   Google Guava Properties     -->
+        <guava.affix>guava</guava.affix>
+        <guava.groupId>${google.superGroupId}.${guava.affix}</guava.groupId>
+        <guava.artifactId>${guava.affix}</guava.artifactId>
+        <guava.version>33.0.0-jre</guava.version>
 
         <!--   maven Plugins Properties     -->
         <maven.affix>maven</maven.affix>
@@ -146,16 +165,6 @@
                     <version>${exec-maven-plugin.version}</version>
                     <configuration>
                         <mainClass>${mainEntrypoint}</mainClass>
-                        <systemProperties>
-                            <systemProperty>
-                                <key>${jooq.groupId}.no-tips</key>
-                                <value>true</value>
-                            </systemProperty>
-                            <systemProperty>
-                                <key>${jooq.groupId}.no-logo</key>
-                                <value>true</value>
-                            </systemProperty>
-                        </systemProperties>
                     </configuration>
                 </plugin>
 
@@ -167,16 +176,6 @@
                         <suiteXmlFiles>
                             ${maven-surefire-plugin.config.suiteXmlFilesPath.testng}/${suite}.xml
                         </suiteXmlFiles>
-                        <systemProperties>
-                            <systemProperty>
-                                <name>${jooq.groupId}.no-tips</name>
-                                <value>true</value>
-                            </systemProperty>
-                            <systemProperty>
-                                <name>${jooq.groupId}.no-logo</name>
-                                <value>true</value>
-                            </systemProperty>
-                        </systemProperties>
                     </configuration>
                 </plugin>
 
@@ -185,27 +184,6 @@
 
         </pluginManagement>
     </build>
-
-    <profiles>
-        <profile>
-            <id>base-data-loader</id>
-            <build>
-                <plugins>
-
-                    <!-- https://www.mojohaus.org/exec-maven-plugin/ -->
-                    <plugin>
-                        <groupId>${exec-maven-plugin.groupId}</groupId>
-                        <artifactId>${exec-maven-plugin.artifactId}</artifactId>
-                        <configuration>
-                            <mainClass>${baseDataLoaderEntrypoint}</mainClass>
-                        </configuration>
-                    </plugin>
-
-                </plugins>
-            </build>
-        </profile>
-
-    </profiles>
 
     <dependencies>
 
@@ -247,13 +225,6 @@
             <version>${apache-commons-io.version}</version>
         </dependency>
 
-
-        <!-- https://mvnrepository.com/artifact/org.jooq/jooq -->
-        <dependency>
-            <groupId>${jooq.groupId}</groupId>
-            <artifactId>${jooq.affix}</artifactId>
-            <version>${jooq.version}</version>
-        </dependency>
 
         <!-- https://mvnrepository.com/artifact/com.mysql/mysql-connector-j -->
         <dependency>
@@ -336,6 +307,34 @@
             <artifactId>${log4j-slf4j2-impl.artifactId}</artifactId>
             <version>${log4j-slf4j2-impl.version}</version>
             <scope>${log4j-slf4j2-impl.scope}</scope>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/com.zebrunner/carina-api -->
+        <dependency>
+            <groupId>${carina.groupId}</groupId>
+            <artifactId>${carina-api.artifactId}</artifactId>
+            <version>${carina-api.version}</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/com.zebrunner/carina-core -->
+        <dependency>
+            <groupId>${carina.groupId}</groupId>
+            <artifactId>${carina-core.artifactId}</artifactId>
+            <version>${carina-core.version}</version>
+        </dependency>
+
+        <!--
+            Required to resolve
+             java.lang.NoClassDefFoundError: com/google/common/collect/ImmutableList
+
+            "java.lang.NoClassDefFoundError: com/google/common/collect/Maps - Selenium"
+             https://stackoverflow.com/questions/18684202/java-lang-noclassdeffounderror-com-google-common-collect-maps-selenium
+             -->
+        <!-- https://mvnrepository.com/artifact/com.google.guava/guava -->
+        <dependency>
+            <groupId>${guava.groupId}</groupId>
+            <artifactId>${guava.artifactId}</artifactId>
+            <version>${guava.version}</version>
         </dependency>
 
 

@@ -1,0 +1,5 @@
+{
+  "status": "type:String",
+  "copyright": "type:String",
+  "errors": "skip"
+}

@@ -37,3 +37,7 @@ buildNumber.properties
 *.class
 *.iml
 .prettierrc*
+
+### Secrets ###
+_config.properties
+_api.properties

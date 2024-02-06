@@ -1,0 +1,87 @@
+{
+  "status": "type:String",
+  "copyright": "type:String",
+  "response": {
+    "docs": [
+      {
+        "abstract": "type:String",
+        "web_url": "type:String",
+        "snippet": "type:String",
+        "lead_paragraph": "type:String",
+        "source": "type:String",
+        "multimedia": [
+          {
+            "rank": "type:Integer",
+            "subtype": "type:String",
+            "subType": "type:String",
+            "caption": "type:String",
+            "credit": "type:String",
+            "type": "type:String",
+            "url": "type:String",
+            "height": "type:Integer",
+            "width": "type:Integer",
+            "legacy": {
+              "thumbnail": "type:String",
+              "thumbnailwidth": "type:Integer",
+              "thumbnailheight": "type:Integer",
+              "wide": "type:String",
+              "widewidth": "type:Integer",
+              "wideheight": "type:Integer",
+              "xlarge": "type:String",
+              "xlargewidth": "type:Integer",
+              "xlargeheight": "type:Integer"
+            },
+            "crop_name": "type:String"
+          }
+        ],
+        "headline": {
+          "main": "type:String",
+          "kicker": "type:String",
+          "content_kicker": "type:String",
+          "print_headline": "type:String",
+          "name": "type:String",
+          "seo": "type:String",
+          "sub": "type:String"
+        },
+        "keywords": [
+          {
+            "name": "type:String",
+            "value": "type:String",
+            "rank": "type:Integer",
+            "major": "type:String"
+          }
+        ],
+        "pub_date": "type:String",
+        "document_type": "type:String",
+        "news_desk": "type:String",
+        "section_name": "type:String",
+        "subsection_name": "type:String",
+        "byline": {
+          "original": "type:String",
+          "person": [
+            {
+              "firstname": "type:String",
+              "middlename": "type:String",
+              "lastname": "type:String",
+              "qualifier": "type:String",
+              "title": "type:String",
+              "role": "type:String",
+              "organization": "type:String",
+              "rank": "type:Integer"
+            }
+          ],
+          "organization": "type:String"
+        },
+        "type_of_material": "type:String",
+        "_id": "type:String",
+        "word_count": "type:Integer",
+        "uri": "type:String"
+      }
+    ],
+    "meta": {
+      "hits": "type:Integer",
+      "offset": "type:Integer",
+      "time": "type:Integer"
+    }
+  }
+}
