@@ -27,7 +27,7 @@ Carina API Assignment:
 
 ## How to Use
 
-### Set Up `_config.properties` flile
+### Set Up `_config.properties` file
 
 1. Go to [developer.nytimes.com](developer.nytimes.com), create an account, and then click on "Apps"
    where the user icon is. Create a new app and then get the API key value from there.
