@@ -39,7 +39,6 @@ public final class ClassConstants {
     // com.solvd.carina.articlefinder
     public static final Class<com.solvd.carina.articlefinder.Main> MAIN_ENTRYPOINT = com.solvd.carina.articlefinder.Main.class;
 
-
     // com.solvd.carina.articlefinder.api
     public static final Class<ArticleSearch> ARTICLE_SEARCH = ArticleSearch.class;
     public static final Class<BadArticleSearch> BAD_ARTICLE_SEARCH = BadArticleSearch.class;
