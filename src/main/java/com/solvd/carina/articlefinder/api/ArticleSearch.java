@@ -2,6 +2,7 @@ package com.solvd.carina.articlefinder.api;
 
 import com.solvd.carina.articlefinder.util.ClassConstants;
 import com.solvd.carina.articlefinder.util.ConfigConstants;
+import com.solvd.carina.articlefinder.util.FilepathConstants;
 import com.solvd.carina.articlefinder.util.QueryStringUtils;
 import com.solvd.carina.articlefinder.util.StringConstants;
 import com.zebrunner.carina.api.AbstractApiMethodV2;
@@ -18,7 +19,7 @@ import org.apache.logging.log4j.Logger;
                 + "${apiKeyValue}",
         methodType = HttpMethodType.GET
 )
-@ResponseTemplatePath(path = "api/article_search/article_search_rs.json")
+@ResponseTemplatePath(path = FilepathConstants.ARTICLE_SEARCH_RS_TEMPLATE_JSON)
 public class ArticleSearch extends AbstractApiMethodV2 {
     private static final Logger LOGGER = LogManager.getLogger(ClassConstants.ARTICLE_SEARCH);
 

@@ -1,6 +1,7 @@
 package com.solvd.carina.articlefinder.api;
 
 import com.solvd.carina.articlefinder.util.ClassConstants;
+import com.solvd.carina.articlefinder.util.FilepathConstants;
 import com.zebrunner.carina.api.annotation.Endpoint;
 import com.zebrunner.carina.api.annotation.ResponseTemplatePath;
 import com.zebrunner.carina.api.http.HttpMethodType;
@@ -13,7 +14,7 @@ import org.apache.logging.log4j.Logger;
                 + "${apiKeyValue}",
         methodType = HttpMethodType.GET
 )
-@ResponseTemplatePath(path = "api/article_search/article_search_400_rs.json")
+@ResponseTemplatePath(path = FilepathConstants.ARTICLE_SEARCH_400_RS_TEMPLATE_JSON)
 public class BadArticleSearch extends ArticleSearch {
     private static final Logger LOGGER = LogManager.getLogger(ClassConstants.BAD_ARTICLE_SEARCH);
 
