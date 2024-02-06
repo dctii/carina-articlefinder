@@ -43,10 +43,7 @@ public class ArticleSearchResponse extends AbstractResponse {
 
     @JsonProperty("copyright")
     public void setCopyright(String copyright) {
-        LOGGER.info("Setting copyright: {}", copyright);
         super.setCopyright(copyright);
-        LOGGER.info("Copyright set to: {}", this.getCopyright());
-        LOGGER.info("Super class copyright: {}", super.getCopyright());
     }
 
     public Response getResponse() {
