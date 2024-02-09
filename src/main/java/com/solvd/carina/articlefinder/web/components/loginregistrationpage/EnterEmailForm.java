@@ -18,7 +18,7 @@ public class EnterEmailForm extends AbstractLoginRegistrationForm {
     @FindBy(xpath = ".//div[contains(@class, 'ButtonsMainContainer')]//button")
     List<SSOButton> ssoButtons;
 
-    @FindBy(xpath = ".//fieldset[@type='email']div[@data-testid='error-message']/span[@role='alert']")
+    @FindBy(xpath = ".//fieldset[@type='email']/div[@data-testid='error-message']/span[@role='alert']")
     ExtendedWebElement errorMessageSpan;
 
     public EnterEmailForm(WebDriver driver, SearchContext searchContext) {
