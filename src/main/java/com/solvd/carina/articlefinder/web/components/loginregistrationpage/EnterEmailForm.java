@@ -11,15 +11,15 @@ import java.util.List;
 public class EnterEmailForm extends AbstractLoginRegistrationForm {
 
     @FindBy(xpath = ".")
-    ExtendedWebElement self;
+    private ExtendedWebElement self;
 
     @FindBy(xpath = ".//button[@type='submit' and @data-testid='submit-email']")
-    ExtendedWebElement continueButton;
+    private ExtendedWebElement continueButton;
     @FindBy(xpath = ".//div[contains(@class, 'ButtonsMainContainer')]//button")
-    List<SSOButton> ssoButtons;
+    private List<SSOButton> ssoButtons;
 
     @FindBy(xpath = ".//fieldset[@type='email']/div[@data-testid='error-message']/span[@role='alert']")
-    ExtendedWebElement errorMessageSpan;
+    private ExtendedWebElement errorMessageSpan;
 
     public EnterEmailForm(WebDriver driver, SearchContext searchContext) {
         super(driver, searchContext);

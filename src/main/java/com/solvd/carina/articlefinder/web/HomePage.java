@@ -9,7 +9,7 @@ import org.openqa.selenium.support.FindBy;
 public class HomePage extends PageContainer {
 
     @FindBy(xpath = "//div[@data-testid='masthead-container']/header")
-    HomeMasterHeader masterHeader;
+    private HomeMasterHeader masterHeader;
 
     /* TODO:
         // HomeNavigationMenu

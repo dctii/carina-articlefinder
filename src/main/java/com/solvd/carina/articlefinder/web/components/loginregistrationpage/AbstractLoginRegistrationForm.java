@@ -12,15 +12,15 @@ public abstract class AbstractLoginRegistrationForm extends AbstractUIObject {
     private static final Logger LOGGER = LogManager.getLogger(AbstractLoginRegistrationForm.class);
 
     @FindBy(xpath = ".//label[@for='email']")
-    ExtendedWebElement emailAddressInputLabel;
+    private ExtendedWebElement emailAddressInputLabel;
     @FindBy(xpath = ".//input[@type='email']")
-    ExtendedWebElement emailInputField;
+    private ExtendedWebElement emailInputField;
 
     @FindBy(xpath = ".//input[@type='password']")
-    ExtendedWebElement passwordInputField;
+    private ExtendedWebElement passwordInputField;
 
     @FindBy(xpath = "//form[@name='Lire-UI-Form']//h2")
-    ExtendedWebElement formHeader;
+    private ExtendedWebElement formHeader;
 
     public AbstractLoginRegistrationForm(WebDriver driver, SearchContext searchContext) {
         super(driver, searchContext);

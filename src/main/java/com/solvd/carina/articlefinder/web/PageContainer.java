@@ -12,14 +12,14 @@ public abstract class PageContainer extends AbstractPage {
 
     // TODO
     @FindBy(xpath = "//nav[@id='site-index']")
-    SiteIndex siteIndex; // above the footer
+    private SiteIndex siteIndex; // above the footer
 
     // TODO
     @FindBy(xpath = "//footer/nav[@data-testid='footer']")
-    Footer footer;
+    private Footer footer;
 
     @FindBy(xpath = "//div[@id='user-modal-drawer']")
-    UserModalDrawer userModalDrawer;
+    private UserModalDrawer userModalDrawer;
 
     public PageContainer(WebDriver driver) {
         super(driver);

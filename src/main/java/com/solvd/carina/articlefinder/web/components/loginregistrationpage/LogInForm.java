@@ -10,15 +10,15 @@ import org.openqa.selenium.support.FindBy;
 public class LogInForm extends AbstractPasswordEnabledForm {
 
     @FindBy(xpath = ".")
-    ExtendedWebElement self;
+    private ExtendedWebElement self;
     @FindBy(xpath = ".//a[@data-testid='forgot-password']")
-    Anchor forgotYourPassword;
+    private Anchor forgotYourPassword;
 
     @FindBy(xpath = ".//button[contains(text(), 'without password')]")
-    ExtendedWebElement logInWithoutPasswordButton;
+    private ExtendedWebElement logInWithoutPasswordButton;
 
     @FindBy(xpath = ".//div[@data-testid='api-error']/span[@role='alert']")
-    ExtendedWebElement emailOrPasswordIncorrectMessageSpan;
+    private ExtendedWebElement emailOrPasswordIncorrectMessageSpan;
 
 
     public LogInForm(WebDriver driver, SearchContext searchContext) {

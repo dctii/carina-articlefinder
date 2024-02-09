@@ -9,10 +9,10 @@ import org.openqa.selenium.support.FindBy;
 public class SearchPageSearchForm extends AbstractSearchForm {
 
     @FindBy(xpath = ".//p[@data-testid='SearchForm-status']")
-    SearchPageSearchStatus searchResultsStatus;
+    private SearchPageSearchStatus searchResultsStatus;
 
     @FindBy(xpath = ".//select[@data-testid='SearchForm-sortBy']")
-    ExtendedWebElement sortByDropdown;
+    private ExtendedWebElement sortByDropdown;
 
     /* TODO:
         @FindBy(xpath = ".//div[@role='form' and @aria-label='Date Range']/parent::div/parent::div/parent::div")

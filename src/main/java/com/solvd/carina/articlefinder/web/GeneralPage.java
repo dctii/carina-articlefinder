@@ -7,7 +7,7 @@ import org.openqa.selenium.support.FindBy;
 public abstract class GeneralPage extends PageContainer {
 
     @FindBy(xpath = "//div[@data-testid='masthead-container']/header")
-    GeneralMasterHeader masterHeader;
+    private GeneralMasterHeader masterHeader;
 
 
     public GeneralPage(WebDriver driver) {

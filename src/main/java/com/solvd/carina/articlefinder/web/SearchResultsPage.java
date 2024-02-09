@@ -14,13 +14,13 @@ import java.util.stream.IntStream;
 // General Search Results Page
 public class SearchResultsPage extends GeneralPage {
     @FindBy(xpath = ".//div[@data-testid='search-form']")
-    SearchPageSearchForm searchForm;
+    private SearchPageSearchForm searchForm;
 
     @FindBy(xpath = "//ol[@data-testid='search-results']/li[@data-testid='search-bodega-result']")
-    List<SearchResultItem> searchResultItems;
+    private List<SearchResultItem> searchResultItems;
 
     @FindBy(xpath = ".//button[@data-testid='search-show-more-button']")
-    ExtendedWebElement showMoreButton;
+    private ExtendedWebElement showMoreButton;
 
     /* TODO:
         SearchPageResultsFilterMenu

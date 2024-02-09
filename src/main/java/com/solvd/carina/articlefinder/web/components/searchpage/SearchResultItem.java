@@ -12,19 +12,19 @@ import java.time.LocalDate;
 
 public class SearchResultItem extends AbstractUIObject {
     @FindBy(xpath = ".//span[@data-testid='todays-date']")
-    ExtendedWebElement pubDate;
+    private ExtendedWebElement pubDate;
     @FindBy(xpath = ".//a[1]")
-    Anchor articleLink;
+    private Anchor articleLink;
     @FindBy(xpath = ".//a[1]/preceding-sibling::p[1]")
-    ExtendedWebElement articleTopic;
+    private ExtendedWebElement articleTopic;
     @FindBy(xpath = ".//a[1]/h4[1]")
-    ExtendedWebElement articleTitle;
+    private ExtendedWebElement articleTitle;
     @FindBy(xpath = ".//a[1]/p[1]")
-    ExtendedWebElement articleDescription;
+    private ExtendedWebElement articleDescription;
     @FindBy(xpath = ".//a[1]/p[2]")
-    ExtendedWebElement articleAuthor;
+    private ExtendedWebElement articleAuthor;
     @FindBy(xpath = ".//figure[@aria-label='media']/div/img")
-    ExtendedWebElement previewImage;
+    private ExtendedWebElement previewImage;
 
     /* TODO:
         @FindBy(xpath = ".//a[1]/span[1]/span[text()='PRINT EDITION']/following-sibling::span")

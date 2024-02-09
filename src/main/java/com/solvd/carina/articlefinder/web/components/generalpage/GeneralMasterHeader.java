@@ -28,6 +28,14 @@ public class GeneralMasterHeader extends MasterHeader {
         return headerLogo;
     }
 
+    public boolean isHeaderLogoPresent(long timeout) {
+        return headerLogo.isPresent(timeout);
+    }
+
+    public boolean isHeaderLogoPresent() {
+        return isHeaderLogoPresent(1);
+    }
+
     public HomePage clickHeaderLogo() {
         headerLogo.click();
 

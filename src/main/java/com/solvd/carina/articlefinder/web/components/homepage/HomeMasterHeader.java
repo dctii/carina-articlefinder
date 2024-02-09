@@ -46,7 +46,14 @@ public class HomeMasterHeader extends MasterHeader {
         return todayDateDisplay;
     }
 
-  
+    public boolean isTodayDateDisplayPresent(long timeout) {
+        return todayDateDisplay.isPresent(timeout);
+    }
+
+    public boolean isTodayDateDisplayPresent() {
+        return isHeaderLogoPresent(1);
+    }
+
     public String getTodayDateDisplayTextString() {
         return todayDateDisplay.getText();
     }
@@ -75,6 +82,14 @@ public class HomeMasterHeader extends MasterHeader {
         return todayPaperLink;
     }
 
+    public boolean isTodayPaperLinkPresent(long timeout) {
+        return todayPaperLink.isPresent(timeout);
+    }
+
+    public boolean isTodayPaperLinkPresent() {
+        return isTodayPaperLinkPresent(1);
+    }
+
 
     public void clickTodayPaperLink() {
         todayPaperLink.click();
@@ -89,6 +104,15 @@ public class HomeMasterHeader extends MasterHeader {
     public Anchor getHeaderLogo() {
         return headerLogo;
     }
+
+    public boolean isHeaderLogoPresent(long timeout) {
+        return headerLogo.isPresent(timeout);
+    }
+
+    public boolean isHeaderLogoPresent() {
+        return isHeaderLogoPresent(1);
+    }
+
 
     public HomePage clickHeaderLogo() {
         headerLogo.click();
