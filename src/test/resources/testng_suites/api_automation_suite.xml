@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="APITests" verbose="1" parallel="tests" thread-count="10">
+    <!--   API Tests     -->
+    <test name="NY Times Tests" thread-count="5">
+        <classes>
+            <class name="com.solvd.carina.articlefinder.ArticleSearchAPITest">
+            </class>
+        </classes>
+
+    </test>
+</suite>

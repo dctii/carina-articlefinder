@@ -10,6 +10,12 @@ public class RegExpConstants {
 
     public static final String YYYYMMDD_DATE_FORMAT = "^\\d{8}$";
 
+    public static final String YEAR = ".*\\d{4}";
+
+    public static final String NUMBERS_WITH_COMMAS = "(\\d+[\\,\\d+]*)";
+
+    public static final String WHITESPACE = "\\s+";
+
 
     private RegExpConstants() {
         ExceptionUtils.preventConstantsInstantiation();

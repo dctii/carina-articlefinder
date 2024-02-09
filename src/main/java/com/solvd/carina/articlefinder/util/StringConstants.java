@@ -44,11 +44,16 @@ public final class StringConstants {
     public static final String DASH_STRING = "-";
     public static final String AT_SIGN = "@";
     public static final String QUESTION_MARK = "?";
+    public static final String SOLIDUS = "/";
     public static final String INF = "INF";
     public static final String DECIMAL_FORMAT_OF_SCALE_2 = "%.2f";
     public static final String YEAR_FIRST_DATE_PATTERN = "yyyy-MM-dd";
     public static final String TIMESTAMP_PATTERN = YEAR_FIRST_DATE_PATTERN + SINGLE_WHITESPACE + "HH:mm:ss";
     public static final String NY_TIMES_PUB_DATE_PATTERN = "yyyy-MM-dd'T'HH:mm:ssX";
+
+    public static final String DOTW_MONTH_D_YYYY_DATE_PATTERN = "EEEE, MMMM d, yyyy";
+    public static final String MONTH_D_YYYY_DATE_PATTERN = "MMMM d, yyyy";
+    public static final String MONTH_ABBREV_D_YYYY_DATE_PATTERN = "MMM. d, yyyy";
 
 
     private StringConstants() {

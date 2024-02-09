@@ -19,11 +19,20 @@
 - org.apache.maven.plugins/maven-compiler-plugin v3.11.0
 - org.codehaus.mojo/exec-maven-plugin v3.1.0
 
-Carina API Assignment:
+### Carina API Assignment:
 
 1. Use Carina for test automation
 2. Create 5 api test cases for any open api resource for testing that you find
 3. Automate 5 API cases
+
+### Carina Web Automation Assignment
+
+1. Download the [latest selenium .jar](https://github.com/SeleniumHQ/selenium/releases/download)
+2. Download [`chromedriver`](https://chromedriver.chromium.org/downloads) which corresponds with your Google Chrome browser version.
+3. Use any website that is not Amazon for test cases creation.
+4. Add 10 test cases to a Google Sheets tab.
+5. Automate these cases with Carina.
+6. Create an `.xml` suite file to run the tests in a single scope.
 
 ## How to Use
 
@@ -40,9 +49,24 @@ Carina API Assignment:
 # Replace "yourkeyhere" with the key from the 
 # NY Times Developers portal where it says 
 
+# Stage Environment (e.g., PROD, DEV, etc.)
+env=${stage}
+
+# API Testing
 nyt_api_key=yourkeyhere
 nyt_api_url=https://api.nytimes.com
 nyt_api_article_search_path=svc/search/v2/articlesearch.json
+
+# Web Automation Testing
+browser=${browser}
+selenium_url=${scheme}://${hostname}:${port}/wd/hub
+
+nytimes_user_email=nytimesdotcomemailhandle
+nytimes_user_pw=nytimesdotcompassword
+
+PROD.nytimes_home_url=https://www.nytimes.com
+
+
 ```
 
 ### Run Tests
