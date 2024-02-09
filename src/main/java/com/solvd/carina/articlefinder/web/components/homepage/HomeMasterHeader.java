@@ -46,12 +46,11 @@ public class HomeMasterHeader extends MasterHeader {
         return todayDateDisplay;
     }
 
+  
     public String getTodayDateDisplayTextString() {
         return todayDateDisplay.getText();
     }
 
-
-    // fails, my local date does not match the local date of the NY Times
     public boolean isTodayDateDisplayMatchingNewYorkLocalDate() {
         String dateString = getTodayDateDisplayTextString(); // e.g., "Thursday, February 8, 2024"
         DateTimeFormatter todayDateFormatter = DateTimeFormatter.ofPattern(
