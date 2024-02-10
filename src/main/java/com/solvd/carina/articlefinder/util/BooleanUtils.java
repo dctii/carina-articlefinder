@@ -1,6 +1,6 @@
 package com.solvd.carina.articlefinder.util;
 
-import com.solvd.carina.articlefinder.bin.ArticleSearchResponse;
+import com.solvd.carina.articlefinder.api.domain.ArticleSearchResponse;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

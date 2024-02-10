@@ -1,4 +1,4 @@
-package com.solvd.carina.articlefinder.bin;
+package com.solvd.carina.articlefinder.api.domain;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.solvd.carina.articlefinder.util.ClassConstants;

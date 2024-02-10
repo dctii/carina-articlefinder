@@ -1,4 +1,4 @@
-package com.solvd.carina.articlefinder.bin;
+package com.solvd.carina.articlefinder.api.domain;
 
 import com.solvd.carina.articlefinder.util.ClassConstants;
 import com.solvd.carina.articlefinder.util.StringFormatters;

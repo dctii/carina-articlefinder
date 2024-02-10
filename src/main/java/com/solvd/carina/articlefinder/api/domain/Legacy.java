@@ -1,4 +1,4 @@
-package com.solvd.carina.articlefinder.bin;
+package com.solvd.carina.articlefinder.api.domain;
 
 import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;

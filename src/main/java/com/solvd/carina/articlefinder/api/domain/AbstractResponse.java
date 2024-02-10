@@ -1,4 +1,4 @@
-package com.solvd.carina.articlefinder.bin;
+package com.solvd.carina.articlefinder.api.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.solvd.carina.articlefinder.util.ClassConstants;
@@ -11,8 +11,7 @@ import java.util.Objects;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public abstract class AbstractResponse {
     private static final Logger LOGGER = LogManager.getLogger(ClassConstants.ABSTRACT_RESPONSE);
-
-
+    
     private String status;
 
     private String copyright;

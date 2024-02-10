@@ -1,4 +1,4 @@
-package com.solvd.carina.articlefinder.api;
+package com.solvd.carina.articlefinder.api.method;
 
 import com.solvd.carina.articlefinder.util.ClassConstants;
 import com.solvd.carina.articlefinder.util.ConfigConstants;
@@ -20,7 +20,7 @@ import org.apache.logging.log4j.Logger;
         methodType = HttpMethodType.GET
 )
 @ResponseTemplatePath(path = FilepathConstants.ARTICLE_SEARCH_RS_TEMPLATE_JSON)
-public class ArticleSearch extends AbstractApiMethodV2 {
+public class GetArticleSearch extends AbstractApiMethodV2 {
     private static final Logger LOGGER = LogManager.getLogger(ClassConstants.ARTICLE_SEARCH);
 
     private static final String QUERY_STRING_PLACEHOLDER_KEY = "queryString";
@@ -28,7 +28,7 @@ public class ArticleSearch extends AbstractApiMethodV2 {
     private static final String API_KEY_VALUE_PLACEHOLDER_KEY = "apiKeyValue";
     private static final String API_KEY_VALUE = Configuration.getRequired(ConfigConstants.NYT_API_KEY_KEY);
 
-    public ArticleSearch(String queryString, String apiKeyValue) {
+    public GetArticleSearch(String queryString, String apiKeyValue) {
         replaceUrlPlaceholder(QUERY_STRING_PLACEHOLDER_KEY, queryString);
         replaceUrlPlaceholder(
                 API_KEY_VALUE_PLACEHOLDER_KEY,
@@ -40,7 +40,7 @@ public class ArticleSearch extends AbstractApiMethodV2 {
         ignorePropertiesProcessor(ClassConstants.NOT_STRING_VALUES_PROCESSOR);
     }
 
-    public ArticleSearch(String queryString) {
+    public GetArticleSearch(String queryString) {
         this(
                 queryString,
                 API_KEY_VALUE

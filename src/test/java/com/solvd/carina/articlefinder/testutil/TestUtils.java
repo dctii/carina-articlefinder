@@ -1,6 +1,6 @@
 package com.solvd.carina.articlefinder.testutil;
 
-import com.solvd.carina.articlefinder.bin.Article;
+import com.solvd.carina.articlefinder.api.domain.Article;
 import com.solvd.carina.articlefinder.util.BooleanUtils;
 import com.solvd.carina.articlefinder.util.DateTimeUtils;
 import com.solvd.carina.articlefinder.util.ExceptionUtils;

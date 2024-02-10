@@ -1,23 +1,23 @@
 package com.solvd.carina.articlefinder.util;
 
-import com.solvd.carina.articlefinder.api.ArticleSearch;
-import com.solvd.carina.articlefinder.api.BadArticleSearch;
-import com.solvd.carina.articlefinder.api.UnauthorizedArticleSearch;
-import com.solvd.carina.articlefinder.bin.AbstractResponse;
-import com.solvd.carina.articlefinder.bin.Article;
-import com.solvd.carina.articlefinder.bin.ArticleSearchMeta;
-import com.solvd.carina.articlefinder.bin.ArticleSearchResponse;
-import com.solvd.carina.articlefinder.bin.BadResponse;
-import com.solvd.carina.articlefinder.bin.Byline;
-import com.solvd.carina.articlefinder.bin.Fault;
-import com.solvd.carina.articlefinder.bin.FaultDetail;
-import com.solvd.carina.articlefinder.bin.FaultResponse;
-import com.solvd.carina.articlefinder.bin.Headline;
-import com.solvd.carina.articlefinder.bin.Keyword;
-import com.solvd.carina.articlefinder.bin.Legacy;
-import com.solvd.carina.articlefinder.bin.MultimediaItem;
-import com.solvd.carina.articlefinder.bin.Person;
-import com.solvd.carina.articlefinder.bin.Response;
+import com.solvd.carina.articlefinder.api.method.GetArticleSearch;
+import com.solvd.carina.articlefinder.api.method.GetBadArticleSearch;
+import com.solvd.carina.articlefinder.api.method.GetUnauthorizedArticleSearch;
+import com.solvd.carina.articlefinder.api.domain.AbstractResponse;
+import com.solvd.carina.articlefinder.api.domain.Article;
+import com.solvd.carina.articlefinder.api.domain.ArticleSearchMeta;
+import com.solvd.carina.articlefinder.api.domain.ArticleSearchResponse;
+import com.solvd.carina.articlefinder.api.domain.BadResponse;
+import com.solvd.carina.articlefinder.api.domain.Byline;
+import com.solvd.carina.articlefinder.api.domain.Fault;
+import com.solvd.carina.articlefinder.api.domain.FaultDetail;
+import com.solvd.carina.articlefinder.api.domain.FaultResponse;
+import com.solvd.carina.articlefinder.api.domain.Headline;
+import com.solvd.carina.articlefinder.api.domain.Keyword;
+import com.solvd.carina.articlefinder.api.domain.Legacy;
+import com.solvd.carina.articlefinder.api.domain.MultimediaItem;
+import com.solvd.carina.articlefinder.api.domain.Person;
+import com.solvd.carina.articlefinder.api.domain.Response;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -40,9 +40,9 @@ public final class ClassConstants {
     public static final Class<com.solvd.carina.articlefinder.Main> MAIN_ENTRYPOINT = com.solvd.carina.articlefinder.Main.class;
 
     // com.solvd.carina.articlefinder.api
-    public static final Class<ArticleSearch> ARTICLE_SEARCH = ArticleSearch.class;
-    public static final Class<BadArticleSearch> BAD_ARTICLE_SEARCH = BadArticleSearch.class;
-    public static final Class<UnauthorizedArticleSearch> UNAUTHORIZED_ARTICLE_SEARCH = UnauthorizedArticleSearch.class;
+    public static final Class<GetArticleSearch> ARTICLE_SEARCH = GetArticleSearch.class;
+    public static final Class<GetBadArticleSearch> BAD_ARTICLE_SEARCH = GetBadArticleSearch.class;
+    public static final Class<GetUnauthorizedArticleSearch> UNAUTHORIZED_ARTICLE_SEARCH = GetUnauthorizedArticleSearch.class;
 
     // com.solvd.carina.articlefinder.bin
     public static final Class<AbstractResponse> ABSTRACT_RESPONSE = AbstractResponse.class;

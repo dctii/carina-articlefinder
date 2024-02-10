@@ -1,12 +1,12 @@
 package com.solvd.carina.articlefinder;
 
-import com.solvd.carina.articlefinder.api.ArticleSearch;
-import com.solvd.carina.articlefinder.api.BadArticleSearch;
-import com.solvd.carina.articlefinder.api.UnauthorizedArticleSearch;
-import com.solvd.carina.articlefinder.bin.Article;
-import com.solvd.carina.articlefinder.bin.ArticleSearchResponse;
-import com.solvd.carina.articlefinder.bin.BadResponse;
-import com.solvd.carina.articlefinder.bin.FaultResponse;
+import com.solvd.carina.articlefinder.api.method.GetArticleSearch;
+import com.solvd.carina.articlefinder.api.method.GetBadArticleSearch;
+import com.solvd.carina.articlefinder.api.method.GetUnauthorizedArticleSearch;
+import com.solvd.carina.articlefinder.api.domain.Article;
+import com.solvd.carina.articlefinder.api.domain.ArticleSearchResponse;
+import com.solvd.carina.articlefinder.api.domain.BadResponse;
+import com.solvd.carina.articlefinder.api.domain.FaultResponse;
 import com.solvd.carina.articlefinder.testutil.TestClassConstants;
 import com.solvd.carina.articlefinder.testutil.TestUtils;
 import com.solvd.carina.articlefinder.util.ArticleSearchResponseConstants;
@@ -95,7 +95,7 @@ public class ArticleSearchAPITest {
     public void tryInvalidFilterQuery(String queryString) {
 
         // instantiate the BadArticleSearch API method with the query string
-        BadArticleSearch badArticleSearch = new BadArticleSearch(queryString);
+        GetBadArticleSearch badArticleSearch = new GetBadArticleSearch(queryString);
 
         // call api, expect 400 response
         badArticleSearch.expectResponseStatus(HttpResponseStatusType.BAD_REQUEST_400);
@@ -128,7 +128,7 @@ public class ArticleSearchAPITest {
     public void tryQueryWithEmptyApiKey(String queryString) {
 
         // instantiate the UnauthorizedArticleSearch API method with the queryString but have empty string for the api key
-        UnauthorizedArticleSearch articleSearch = new UnauthorizedArticleSearch(
+        GetUnauthorizedArticleSearch articleSearch = new GetUnauthorizedArticleSearch(
                 queryString,
                 StringConstants.EMPTY_STRING
         );
@@ -165,8 +165,8 @@ public class ArticleSearchAPITest {
 
         // instantiate the UnauthorizedArticleSearch API method with queryString, but use null for the api key
         // null for the apiKeyValue with this constructor will completely exclude the 'api-key' param
-        UnauthorizedArticleSearch articleSearch =
-                new UnauthorizedArticleSearch(queryString, null);
+        GetUnauthorizedArticleSearch articleSearch =
+                new GetUnauthorizedArticleSearch(queryString, null);
 
         // call the api and expect a 401
         articleSearch.expectResponseStatus(HttpResponseStatusType.UNAUTHORIZED_401);
@@ -206,7 +206,7 @@ public class ArticleSearchAPITest {
         );
 
         // instantiate the ArticleSearch API method with the built query string
-        ArticleSearch articleSearch = new ArticleSearch(queryStringBuilder.build());
+        GetArticleSearch articleSearch = new GetArticleSearch(queryStringBuilder.build());
 
         // call api, expect 200
         articleSearch.expectResponseStatus(HttpResponseStatusType.OK_200);
@@ -237,7 +237,7 @@ public class ArticleSearchAPITest {
     public void verifyQuerySortingIsNewest(String queryString) {
 
         // instantiate the ArticleSearch API method with the queryString
-        ArticleSearch articleSearch = new ArticleSearch(queryString);
+        GetArticleSearch articleSearch = new GetArticleSearch(queryString);
 
         // call api, expect 200
         articleSearch.expectResponseStatus(HttpResponseStatusType.OK_200);

@@ -1,4 +1,4 @@
-package com.solvd.carina.articlefinder.api;
+package com.solvd.carina.articlefinder.api.method;
 
 import com.solvd.carina.articlefinder.util.ClassConstants;
 import com.solvd.carina.articlefinder.util.FilepathConstants;
@@ -15,14 +15,14 @@ import org.apache.logging.log4j.Logger;
         methodType = HttpMethodType.GET
 )
 @ResponseTemplatePath(path = FilepathConstants.ARTICLE_SEARCH_400_RS_TEMPLATE_JSON)
-public class BadArticleSearch extends ArticleSearch {
+public class GetBadArticleSearch extends GetArticleSearch {
     private static final Logger LOGGER = LogManager.getLogger(ClassConstants.BAD_ARTICLE_SEARCH);
 
-    public BadArticleSearch(String queryString, String apiKeyValue) {
+    public GetBadArticleSearch(String queryString, String apiKeyValue) {
         super(queryString, apiKeyValue);
     }
 
-    public BadArticleSearch(String queryString) {
+    public GetBadArticleSearch(String queryString) {
         super(queryString);
     }
 

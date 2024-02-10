@@ -1,4 +1,4 @@
-package com.solvd.carina.articlefinder.api;
+package com.solvd.carina.articlefinder.api.method;
 
 import com.solvd.carina.articlefinder.util.ClassConstants;
 import com.solvd.carina.articlefinder.util.FilepathConstants;
@@ -15,14 +15,14 @@ import org.apache.logging.log4j.Logger;
         methodType = HttpMethodType.GET
 )
 @ResponseTemplatePath(path = FilepathConstants.ARTICLE_SEARCH_FAULT_RS_TEMPLATE_JSON)
-public class UnauthorizedArticleSearch extends ArticleSearch {
+public class GetUnauthorizedArticleSearch extends GetArticleSearch {
     private static final Logger LOGGER = LogManager.getLogger(ClassConstants.UNAUTHORIZED_ARTICLE_SEARCH);
 
-    public UnauthorizedArticleSearch(String queryString, String apiKeyValue) {
+    public GetUnauthorizedArticleSearch(String queryString, String apiKeyValue) {
         super(queryString, apiKeyValue);
     }
 
-    public UnauthorizedArticleSearch(String queryString) {
+    public GetUnauthorizedArticleSearch(String queryString) {
         super(queryString);
     }
 
