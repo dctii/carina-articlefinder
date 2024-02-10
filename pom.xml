@@ -187,21 +187,12 @@
             <version>${log4j.version}</version>
         </dependency>
 
-
         <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-lang3-->
         <dependency>
             <groupId>${apache-commons.groupId}</groupId>
             <artifactId>${apache-commons.affix}-lang3</artifactId>
             <version>${apache-commons-lang3.version}</version>
         </dependency>
-
-        <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-csv -->
-        <dependency>
-            <groupId>${apache-commons.groupId}</groupId>
-            <artifactId>${apache-commons.affix}-csv</artifactId>
-            <version>${apache-commons-csv.version}</version>
-        </dependency>
-
 
         <!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
         <dependency>
