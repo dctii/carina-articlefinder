@@ -1,8 +1,7 @@
 package com.solvd.carina.articlefinder.web.components.generalpage;
 
-import com.solvd.carina.articlefinder.util.StringConstants;
 import com.solvd.carina.articlefinder.web.HomePage;
-import com.solvd.carina.articlefinder.web.components.generic.Anchor;
+import com.solvd.carina.articlefinder.web.elements.Anchor;
 import com.solvd.carina.articlefinder.web.components.generic.MasterHeader;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
 import org.apache.logging.log4j.LogManager;
@@ -24,6 +23,9 @@ public class GeneralMasterHeader extends MasterHeader {
         super(driver, searchContext);
     }
 
+    /*
+        headerLogo
+     */
     public ExtendedWebElement getHeaderLogo() {
         return headerLogo;
     }
@@ -42,38 +44,27 @@ public class GeneralMasterHeader extends MasterHeader {
         return new HomePage(getDriver());
     }
 
+    /*
+        sectionLabel
+     */
     public Anchor getSectionLabel() {
         return sectionLabel;
     }
 
+    public boolean isSectionLabelPresent(long timeout) {
+        return headerLogo.isPresent(timeout);
+    }
+
+    public boolean isSectionLabelPresent() {
+        return isHeaderLogoPresent(1);
+    }
+
     public String getSectionLabelTextString() {
-        String sectionLabelTextString = StringConstants.EMPTY_STRING;
-
-        if (sectionLabel.isPresent()) {
-            sectionLabelTextString = sectionLabel.getText();
-        } else {
-            LOGGER.warn(
-                    "Section label of the general master header is not present. Returning an " +
-                            "empty string for text()"
-            );
-        }
-
-        return sectionLabelTextString;
+        return sectionLabel.getText();
     }
 
     public String getSectionLabelHrefString() {
-        String sectionLabelHrefString = StringConstants.EMPTY_STRING;
-
-        if (sectionLabel.isPresent()) {
-            sectionLabelHrefString = sectionLabel.getHref();
-        } else {
-            LOGGER.warn(
-                    "Section label of the general master header is not present. Returning an " +
-                            "empty string for href"
-            );
-        }
-
-        return sectionLabelHrefString;
+        return sectionLabel.getHref();
 
     }
 }

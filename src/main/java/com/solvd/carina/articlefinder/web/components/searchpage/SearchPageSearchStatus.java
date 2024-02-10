@@ -3,11 +3,14 @@ package com.solvd.carina.articlefinder.web.components.searchpage;
 import com.solvd.carina.articlefinder.util.NumberUtils;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
 import com.zebrunner.carina.webdriver.gui.AbstractUIObject;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 
 public class SearchPageSearchStatus extends AbstractUIObject {
+    private static final Logger LOGGER = LogManager.getLogger(SearchPageSearchStatus.class);
 
     //    @FindBy(xpath = ".//p[@data-testid='SearchForm-status']")
     @FindBy(xpath = ".//span[@data-testid='search-status-screenreader']")
@@ -20,8 +23,36 @@ public class SearchPageSearchStatus extends AbstractUIObject {
         super(driver, searchContext);
     }
 
+    /*
+        self
+     */
+
+    public ExtendedWebElement getSelf() {
+        return this.getRootExtendedElement();
+    }
+
+    public boolean isPresent(long timeout) {
+        return this.getSelf().isPresent(timeout);
+    }
+
+    public boolean isPresent() {
+        return this.isPresent(1);
+    }
+
+    /*
+        resultsText
+    */
+
     public ExtendedWebElement getResultsText() {
         return resultsText;
+    }
+
+    public boolean isResultsTextPresent(long timeout) {
+        return resultsText.isPresent(timeout);
+    }
+
+    public boolean isResultsTextPresent() {
+        return this.isResultsTextPresent(1);
     }
 
     public String getResultsTextString() {
@@ -49,8 +80,20 @@ public class SearchPageSearchStatus extends AbstractUIObject {
         );
     }
 
+    /*
+        searchQueryText
+    */
+
     public ExtendedWebElement getSearchQueryText() {
         return searchQueryText;
+    }
+
+    public boolean isSearchQueryTextPresent(long timeout) {
+        return searchQueryText.isPresent(timeout);
+    }
+
+    public boolean isSearchQueryTextPresent() {
+        return this.isSearchQueryTextPresent(1);
     }
 
     public String getSearchQueryTextString() {

@@ -26,16 +26,56 @@ public abstract class AbstractLoginRegistrationForm extends AbstractUIObject {
         super(driver, searchContext);
     }
 
+    /*
+        self
+     */
+
+    public ExtendedWebElement getSelf() {
+        return this.getRootExtendedElement();
+    }
+
+    public boolean isPresent(long timeout) {
+        return this.getSelf().isPresent(timeout);
+    }
+
+    public boolean isPresent() {
+        return this.isPresent(1);
+    }
+
+    /*
+        emailAddressInputLabel
+    */
+
     public ExtendedWebElement getEmailAddressInputLabel() {
         return emailAddressInputLabel;
+    }
+
+    public boolean isEmailAddressInputLabelPresent(long timeout) {
+        return emailAddressInputLabel.isPresent(timeout);
+    }
+
+    public boolean isEmailAddressInputLabelPresent() {
+        return this.isEmailAddressInputLabelPresent(1);
     }
 
     public String getEmailAddresInputLabelTextString() {
         return emailAddressInputLabel.getText();
     }
 
+    /*
+        emailInputField
+    */
+
     public ExtendedWebElement getEmailInputField() {
         return emailInputField;
+    }
+
+    public boolean isEmailInputFieldPresent(long timeout) {
+        return emailInputField.isPresent(timeout);
+    }
+
+    public boolean isEmailInputFieldPresent() {
+        return this.isEmailInputFieldPresent(1);
     }
 
     public void typeEmailInputValue(String value) {
@@ -43,10 +83,19 @@ public abstract class AbstractLoginRegistrationForm extends AbstractUIObject {
         emailInputField.type(value);
     }
 
-    // no typeEmailInputValue method in this class since unable to use in EnterEmailForm extension,
-    // but still available as hidden, so can be used for testing if hidden or not
+    /*
+        passwordInputField
+    */
     public ExtendedWebElement getPasswordInputField() {
         return passwordInputField;
+    }
+
+    public boolean isPasswordInputFieldPresent(long timeout) {
+        return passwordInputField.isPresent(timeout);
+    }
+
+    public boolean isPasswordInputFieldPresent() {
+        return this.isPasswordInputFieldPresent(1);
     }
 
     public void typePasswordInputValue(String value) {
@@ -54,8 +103,20 @@ public abstract class AbstractLoginRegistrationForm extends AbstractUIObject {
         passwordInputField.type(value);
     }
 
+    /*
+        formHeader
+    */
+
     public ExtendedWebElement getFormHeader() {
         return formHeader;
+    }
+
+    public boolean isFormHeaderPresent(long timeout) {
+        return formHeader.isPresent(timeout);
+    }
+
+    public boolean isFormHeaderPresent() {
+        return this.isFormHeaderPresent(1);
     }
 
     public String getFormHeaderTextString() {

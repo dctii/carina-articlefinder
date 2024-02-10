@@ -2,11 +2,14 @@ package com.solvd.carina.articlefinder.web.components.searchpage;
 
 import com.solvd.carina.articlefinder.web.components.generic.AbstractSearchForm;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 
 public class SearchPageSearchForm extends AbstractSearchForm {
+    private static final Logger LOGGER = LogManager.getLogger(SearchPageSearchForm.class);
 
     @FindBy(xpath = ".//p[@data-testid='SearchForm-status']")
     private SearchPageSearchStatus searchResultsStatus;
@@ -24,12 +27,36 @@ public class SearchPageSearchForm extends AbstractSearchForm {
         super(driver, searchContext);
     }
 
+    /*
+        searchResultsStatus
+    */
+
     public SearchPageSearchStatus getSearchResultsStatus() {
         return searchResultsStatus;
     }
 
+    public boolean isSearchResultsStatusPresent(long timeout) {
+        return searchResultsStatus.isPresent(timeout);
+    }
+
+    public boolean isSearchResultsStatusPresent() {
+        return this.isSearchResultsStatusPresent(1);
+    }
+
+    /*
+        sortByDropdown
+    */
+
     public ExtendedWebElement getSortByDropdown() {
         return sortByDropdown;
+    }
+
+    public boolean isSortByDropdownPresent(long timeout) {
+        return sortByDropdown.isPresent(timeout);
+    }
+
+    public boolean isSortByDropdownPresent() {
+        return this.isSortByDropdownPresent(1);
     }
 
 

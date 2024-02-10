@@ -1,5 +1,8 @@
 package com.solvd.carina.articlefinder;
 
+import com.solvd.carina.articlefinder.exception.WindowTabNotFoundException;
+import com.solvd.carina.articlefinder.testutil.TestClassConstants;
+import com.solvd.carina.articlefinder.testutil.WebTestConstants;
 import com.solvd.carina.articlefinder.testutil.WebTestUtils;
 import com.solvd.carina.articlefinder.util.ConfigConstants;
 import com.solvd.carina.articlefinder.util.StringConstants;
@@ -7,7 +10,6 @@ import com.solvd.carina.articlefinder.web.HomePage;
 import com.solvd.carina.articlefinder.web.components.homepage.HomeMasterHeader;
 import com.zebrunner.carina.core.AbstractTest;
 import com.zebrunner.carina.utils.config.Configuration;
-import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.JavascriptExecutor;
@@ -16,7 +18,11 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class HomePageWebTest extends AbstractTest {
-    private static final Logger LOGGER = LogManager.getLogger(HomePageWebTest.class);
+    private static final Logger LOGGER = LogManager.getLogger(TestClassConstants.HOME_PAGE_WEB_TEST);
+
+    private static final String EXPECTED_HOME_URL =
+            Configuration.getRequired(ConfigConstants.NYT_HOME_URL_KEY)
+                    + StringConstants.SOLIDUS;
 
     @Test(description = "Check if master header elements all exist")
     public void validateHomeMasterHeaderElementsPresent() {
@@ -25,42 +31,52 @@ public class HomePageWebTest extends AbstractTest {
 
         page.open();
 
-        WebTestUtils.checkHomePageUrlAndTitle(page);
+        Assert.assertEquals(
+                driver.getCurrentUrl(),
+                EXPECTED_HOME_URL,
+                "Actual url does not match expected."
+        );
+
+        Assert.assertEquals(
+                driver.getTitle(),
+                WebTestConstants.EXPECTED_HOME_PAGE_TITLE,
+                "Actual title does not match expected."
+        );
 
         HomeMasterHeader homeMasterHeader = page.getMasterHeader();
 
         Assert.assertTrue(
-                homeMasterHeader.getHeaderLogo().isPresent(),
+                homeMasterHeader.isHeaderLogoPresent(),
                 "Header logo is not present."
         );
 
         Assert.assertTrue(
-                homeMasterHeader.getSearchButton().isPresent(),
+                homeMasterHeader.isSearchButtonButtonPresent(),
                 "Search button is not present."
         );
 
         Assert.assertTrue(
-                homeMasterHeader.getDesktopSectionsButton().isPresent(),
+                homeMasterHeader.isDesktopSectionsButtonPresent(),
                 "Desktop sections button is not present."
         );
 
         Assert.assertTrue(
-                homeMasterHeader.getTodayDateDisplay().isPresent(),
+                homeMasterHeader.isTodayDateDisplayPresent(),
                 "Today date display is not present."
         );
 
         Assert.assertTrue(
-                homeMasterHeader.getTodayPaperLink().isPresent(),
+                homeMasterHeader.isTodayPaperLinkPresent(),
                 "Today paper link button is present."
         );
 
         Assert.assertTrue(
-                homeMasterHeader.getSubscribeButton().isPresent(),
+                homeMasterHeader.isSubscribeButtonPresent(),
                 "Subscribe button is not present."
         );
 
         Assert.assertTrue(
-                homeMasterHeader.getLogInButton().isPresent(),
+                homeMasterHeader.isLogInButtonPresent(),
                 "Log In button is not present."
         );
     }
@@ -72,13 +88,13 @@ public class HomePageWebTest extends AbstractTest {
 
         page.open();
 
-        WebTestUtils.checkHomePageUrlAndTitle(page);
-
         HomeMasterHeader homeMasterHeader = page.getMasterHeader();
 
         Assert.assertTrue(
-                homeMasterHeader.isTodayDateDisplayMatchingNewYorkLocalDate(),
-                "Header logo is not present."
+                WebTestUtils.isMatchingCurrentNewYorkDate(
+                        homeMasterHeader.getTodayDateDisplayTextString()
+                ),
+                "Today date not matching current New York Date"
         );
     }
 
@@ -93,27 +109,28 @@ public class HomePageWebTest extends AbstractTest {
         int numberOfTabsOpen = driver.getWindowHandles().size();
 
         HomeMasterHeader homeMasterHeader = page.getMasterHeader();
-        ExtendedWebElement headerLogo = homeMasterHeader.getHeaderLogo();
 
         // NOTE: need to see if we can open the new tab without JS, but with CMD+CLICK or CTRL+CLICK
-        String link = headerLogo.getAttribute("href"); // Assuming 'href' attribute is present
-        ((JavascriptExecutor) driver).executeScript("window.open(arguments[0]);", link);
+        ((JavascriptExecutor) driver).executeScript(
+                "window.open(arguments[0]);",
+                homeMasterHeader.getHeaderLogoHref()
+        );
 
         // validate that two tabs have been opened
         Assert.assertEquals(driver.getWindowHandles().size(), numberOfTabsOpen + 1);
 
-        // get the new tb handle and switch to it
+        // get the new tab handle and switch to it
         String newTab = driver.getWindowHandles()
                 .stream()
                 .filter(handle -> !handle.equals(originalTab))
                 .findFirst()
-                .orElseThrow(() -> new RuntimeException("New tab not found"));
+                .orElseThrow(() -> new WindowTabNotFoundException("New tab not found"));
         driver.switchTo().window(newTab);
 
         // validate the url of new tab is home url
         Assert.assertEquals(
                 driver.getCurrentUrl(),
-                Configuration.getRequired(ConfigConstants.NYT_HOME_URL_KEY) + StringConstants.SOLIDUS,
+                EXPECTED_HOME_URL,
                 "URL does not match expected");
 
         // close tab and go back to original window

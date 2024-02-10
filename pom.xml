@@ -5,7 +5,7 @@
 >
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.solvd.carina.weather</groupId>
+    <groupId>com.solvd.carina</groupId>
     <artifactId>articlefinder</artifactId>
     <version>1.0.0</version>
 
@@ -34,21 +34,6 @@
 
         <!--   Apache Commons-IO Properties     -->
         <apache-commons-io.version>2.15.0</apache-commons-io.version>
-
-
-        <!--   MySQL Connector J Properties     -->
-        <mysql.affix>mysql</mysql.affix>
-        <mysql-connector-j.version>8.2.0</mysql-connector-j.version>
-
-        <!--   MyBatis Properties     -->
-        <mybatis.affix>mybatis</mybatis.affix>
-        <mybatis.version>3.5.15</mybatis.version>
-
-        <!--   JAXB Properties     -->
-        <jaxb.affix>jaxb</jaxb.affix>
-        <jaxb.groupId>org.glassfish.${jaxb.affix}</jaxb.groupId>
-        <jaxb-core.version>4.0.4</jaxb-core.version>
-        <jaxb-runtime.version>4.0.4</jaxb-runtime.version>
 
         <!--   Jackson Properties     -->
         <jackson.affix>jackson</jackson.affix>
@@ -116,7 +101,8 @@
 
         <!--   maven surefire Plugin Properties     -->
         <maven-surefire-plugin.groupId>${maven-plugins.groupId}</maven-surefire-plugin.groupId>
-        <maven-surefire-plugin.artifactId>${maven.affix}-surefire-plugin
+        <maven-surefire-plugin.artifactId>
+            ${maven.affix}-surefire-plugin
         </maven-surefire-plugin.artifactId>
         <maven-surefire-plugin.version>3.2.5</maven-surefire-plugin.version>
         <maven-surefire-plugin.config.suiteXmlFilesPath.testng>
@@ -129,7 +115,6 @@
         <exec-maven-plugin.artifactId>exec-${maven.affix}-plugin</exec-maven-plugin.artifactId>
         <exec-maven-plugin.version>3.1.0</exec-maven-plugin.version>
         <mainEntrypoint>${self.groupId}.Main</mainEntrypoint>
-        <baseDataLoaderEntrypoint>${self.groupId}.BaseDataLoader</baseDataLoaderEntrypoint>
 
         <!--
         To resolve these warning flags:
@@ -225,21 +210,6 @@
             <version>${apache-commons-io.version}</version>
         </dependency>
 
-
-        <!-- https://mvnrepository.com/artifact/com.mysql/mysql-connector-j -->
-        <dependency>
-            <groupId>com.${mysql.affix}</groupId>
-            <artifactId>${mysql.affix}-connector-j</artifactId>
-            <version>${mysql-connector-j.version}</version>
-        </dependency>
-
-        <!-- https://mvnrepository.com/artifact/org.mybatis/mybatis -->
-        <dependency>
-            <groupId>org.${mybatis.affix}</groupId>
-            <artifactId>${mybatis.affix}</artifactId>
-            <version>${mybatis.version}</version>
-        </dependency>
-
         <!-- https://mvnrepository.com/artifact/com.googlecode.libphonenumber/libphonenumber -->
         <dependency>
             <groupId>com.googlecode.${libphonenumber.affix}</groupId>
@@ -247,19 +217,6 @@
             <version>${google-libphonenumber.version}</version>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/org.glassfish.jaxb/jaxb-core -->
-        <dependency>
-            <groupId>${jaxb.groupId}</groupId>
-            <artifactId>${jaxb.affix}-core</artifactId>
-            <version>${jaxb-core.version}</version>
-        </dependency>
-
-        <!-- https://mvnrepository.com/artifact/org.glassfish.jaxb/jaxb-runtime -->
-        <dependency>
-            <groupId>${jaxb.groupId}</groupId>
-            <artifactId>${jaxb.affix}-runtime</artifactId>
-            <version>${jaxb-runtime.version}</version>
-        </dependency>
 
         <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-core -->
         <dependency>

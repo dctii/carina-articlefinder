@@ -26,7 +26,7 @@ import org.testng.annotations.Test;
 import java.util.List;
 
 public class ArticleSearchAPITest {
-    private static final Logger LOGGER = LogManager.getLogger(TestClassConstants.ARTICLE_SEARCH_TEST);
+    private static final Logger LOGGER = LogManager.getLogger(TestClassConstants.ARTICLE_SEARCH_API_TEST);
 
     @DataProvider
     public static Object[][] queriesWithBrokenFilterQueryParam() {

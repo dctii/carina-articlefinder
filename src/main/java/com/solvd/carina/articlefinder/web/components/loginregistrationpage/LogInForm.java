@@ -1,45 +1,54 @@
 package com.solvd.carina.articlefinder.web.components.loginregistrationpage;
 
-import com.solvd.carina.articlefinder.util.AttributeUtils;
-import com.solvd.carina.articlefinder.web.components.generic.Anchor;
+import com.solvd.carina.articlefinder.web.elements.Anchor;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 
 public class LogInForm extends AbstractPasswordEnabledForm {
+    private static final Logger LOGGER = LogManager.getLogger(LogInForm.class);
 
-    @FindBy(xpath = ".")
-    private ExtendedWebElement self;
     @FindBy(xpath = ".//a[@data-testid='forgot-password']")
-    private Anchor forgotYourPassword;
+    private Anchor forgotYourPasswordLink;
 
     @FindBy(xpath = ".//button[contains(text(), 'without password')]")
     private ExtendedWebElement logInWithoutPasswordButton;
 
     @FindBy(xpath = ".//div[@data-testid='api-error']/span[@role='alert']")
-    private ExtendedWebElement emailOrPasswordIncorrectMessageSpan;
+    private ExtendedWebElement wrongEmailOrPasswordMessage;
 
 
     public LogInForm(WebDriver driver, SearchContext searchContext) {
         super(driver, searchContext);
     }
 
-    public ExtendedWebElement getSelf() {
-        return self;
+
+    /*
+        forgotYourPasswordLink
+    */
+
+    public Anchor getForgotYourPasswordLink() {
+        return forgotYourPasswordLink;
     }
 
-    public String getFormMethodString() {
-        return AttributeUtils.getFormMethodString(self);
+    public boolean isForgotYourPasswordLinkPresent(long timeout) {
+        return forgotYourPasswordLink.isPresent(timeout);
     }
 
-    public Anchor getForgotYourPassword() {
-        return forgotYourPassword;
+    public boolean isForgotYourPasswordLinkPresent() {
+        return this.isForgotYourPasswordLinkPresent(1);
     }
 
     public void clickForgotYourPassword() {
-        forgotYourPassword.click();
+        forgotYourPasswordLink.click();
     }
+
+    /*
+        logInWithoutPasswordButton
+    */
 
     public ExtendedWebElement getLogInWithoutPasswordButton() {
         return logInWithoutPasswordButton;
@@ -49,11 +58,23 @@ public class LogInForm extends AbstractPasswordEnabledForm {
         logInWithoutPasswordButton.click();
     }
 
-    public ExtendedWebElement getEmailOrPasswordIncorrectMessageSpan() {
-        return emailOrPasswordIncorrectMessageSpan;
+    /*
+        getWrongEmailOrPasswordMessage
+    */
+
+    public ExtendedWebElement getWrongEmailOrPasswordMessage() {
+        return wrongEmailOrPasswordMessage;
     }
 
-    public String getEmailOrPasswordIncorrectMessageTextString() {
-        return emailOrPasswordIncorrectMessageSpan.getText();
+    public boolean isWrongEmailOrPasswordMessagePresent(long timeout) {
+        return wrongEmailOrPasswordMessage.isPresent(timeout);
+    }
+
+    public boolean isWrongEmailOrPasswordMessagePresent() {
+        return this.isWrongEmailOrPasswordMessagePresent(1);
+    }
+
+    public String getWrongEmailOrPasswordMessageTextString() {
+        return wrongEmailOrPasswordMessage.getText();
     }
 }

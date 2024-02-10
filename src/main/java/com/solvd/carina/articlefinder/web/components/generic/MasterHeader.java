@@ -1,8 +1,9 @@
 package com.solvd.carina.articlefinder.web.components.generic;
 
-import com.solvd.carina.articlefinder.util.AttributeUtils;
+import com.solvd.carina.articlefinder.util.AttributeConstants;
 import com.solvd.carina.articlefinder.web.UserAccessPage;
 import com.solvd.carina.articlefinder.web.components.generalpage.HeaderSearchInputForm;
+import com.solvd.carina.articlefinder.web.elements.Anchor;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
 import com.zebrunner.carina.webdriver.gui.AbstractUIObject;
 import org.apache.logging.log4j.LogManager;
@@ -43,12 +44,56 @@ public abstract class MasterHeader extends AbstractUIObject {
         super(driver, searchContext);
     }
 
+    /*
+        self
+     */
+
+    public ExtendedWebElement getSelf() {
+        return this.getRootExtendedElement();
+    }
+
+    public boolean isPresent(long timeout) {
+        return this.getSelf().isPresent(timeout);
+    }
+
+    public boolean isPresent() {
+        return this.isPresent(1);
+    }
+
+    /*
+        desktopSectionsButton
+    */
+
     public ExtendedWebElement getDesktopSectionsButton() {
         return desktopSectionsButton;
     }
 
+    public boolean isDesktopSectionsButtonPresent(long timeout) {
+        return desktopSectionsButton.isPresent(timeout);
+    }
+
+    public boolean isDesktopSectionsButtonPresent() {
+        return this.isDesktopSectionsButtonPresent(1);
+    }
+
+    public void clickDesktopSectionsButton() {
+        desktopSectionsButton.click();
+    }
+
+    /*
+        searchButton
+    */
+
     public ExtendedWebElement getSearchButton() {
         return searchButton;
+    }
+
+    public boolean isSearchButtonButtonPresent(long timeout) {
+        return searchButton.isPresent(timeout);
+    }
+
+    public boolean isSearchButtonButtonPresent() {
+        return this.isSearchButtonButtonPresent(1);
     }
 
     public void clickSearchButton() {
@@ -56,15 +101,29 @@ public abstract class MasterHeader extends AbstractUIObject {
     }
 
     public boolean getSearchButtonAriaExpandedBoolean() {
-        return AttributeUtils.getAriaExpandedBoolean(searchButton);
+        String ariaExpandedString =
+                searchButton.getAttribute(AttributeConstants.ARIA_EXPANDED);
+        return Boolean.parseBoolean(ariaExpandedString);
     }
+
+    /*
+        searchInputForm
+    */
 
     public HeaderSearchInputForm getSearchInputForm() {
         return searchInputForm;
     }
 
+    public boolean isSearchInputFormPresent(long timeout) {
+        return searchInputForm.isPresent(timeout);
+    }
+
+    public boolean isSearchInputFormPresent() {
+        return this.isSearchInputFormPresent(1);
+    }
+
     public void expandSearchInputBox() {
-        if (AttributeUtils.isAriaNotExpanded(searchButton)) {
+        if (!getSearchButtonAriaExpandedBoolean()) {
             clickSearchButton();
         } else {
             LOGGER.warn(
@@ -75,18 +134,30 @@ public abstract class MasterHeader extends AbstractUIObject {
     }
 
     public void collapseSearchInputBox() {
-        if (AttributeUtils.isAriaExpanded(searchButton)) {
+        if (getSearchButtonAriaExpandedBoolean()) {
             clickSearchButton();
         } else {
             LOGGER.warn(
-                    "Cannot collapse search input box. It may already be expanded since " +
+                    "Cannot collapse search input box. It may already be collapsed since " +
                             "'aria-expanded=false' for search button."
             );
         }
     }
 
+    /*
+        subscribeButton
+    */
+
     public Anchor getSubscribeButton() {
         return subscribeButton;
+    }
+
+    public boolean isSubscribeButtonPresent(long timeout) {
+        return subscribeButton.isPresent(timeout);
+    }
+
+    public boolean isSubscribeButtonPresent() {
+        return this.isSubscribeButtonPresent(1);
     }
 
     public void clickSubscribeButton() {
@@ -97,40 +168,62 @@ public abstract class MasterHeader extends AbstractUIObject {
         return subscribeButton.getText();
     }
 
+    /*
+        logInButton
+    */
+
     public Anchor getLogInButton() {
         return logInButton;
     }
 
+    public boolean isLogInButtonPresent(long timeout) {
+        return logInButton.isPresent(timeout);
+    }
+
+    public boolean isLogInButtonPresent() {
+        return this.isLogInButtonPresent(1);
+    }
 
     public String getLogInButtonTextString() {
-        String logInButtonText = "";
-        if (logInButton.isPresent()) {
-            logInButtonText = logInButton.getText();
-        } else {
-            LOGGER.warn("Log in button in master header of home page is not present.");
-        }
-        return logInButtonText;
+        return logInButton.getText();
     }
 
     public UserAccessPage clickLogInButton() {
-        if (logInButton.isPresent()) {
-            logInButton.click();
-        }
-
+        logInButton.click();
         return new UserAccessPage(getDriver());
     }
+
+    public UserAccessPage clickLogInButtonIfPresent() {
+        logInButton.clickIfPresent();
+        return new UserAccessPage(getDriver());
+    }
+
+    /*
+        userSettingsButton
+    */
 
     public ExtendedWebElement getUserSettingsButton() {
         return userSettingsButton;
     }
 
-    public void clickUserSettingsButton() {
-        if (userSettingsButton.isPresent()) {
-            userSettingsButton.click();
-        }
+    public boolean isUserSettingsButtonPresent(long timeout) {
+        return userSettingsButton.isPresent(timeout);
     }
 
-    public void openUserSettingsDrawer() {
-        clickUserSettingsButton();
+    public boolean isUserSettingsButtonPresent() {
+        return this.isUserSettingsButtonPresent(1);
+    }
+
+    public String getUserSettingsButtonText() {
+        return userSettingsButton.getText();
+    }
+
+    public void clickUserSettingsButton() {
+        // opens the drawer
+        userSettingsButton.click();
+    }
+
+    public void clickUserSettingsButtonIfPresent() {
+        userSettingsButton.clickIfPresent();
     }
 }

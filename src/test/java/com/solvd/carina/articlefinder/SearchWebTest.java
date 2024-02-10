@@ -1,7 +1,7 @@
 package com.solvd.carina.articlefinder;
 
+import com.solvd.carina.articlefinder.testutil.TestClassConstants;
 import com.solvd.carina.articlefinder.testutil.WebTestConstants;
-import com.solvd.carina.articlefinder.testutil.WebTestUtils;
 import com.solvd.carina.articlefinder.web.HomePage;
 import com.solvd.carina.articlefinder.web.SearchResultsPage;
 import com.solvd.carina.articlefinder.web.components.generalpage.HeaderSearchInputForm;
@@ -16,7 +16,7 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 public class SearchWebTest extends AbstractTest {
-    private static final Logger LOGGER = LogManager.getLogger(SearchWebTest.class);
+    private static final Logger LOGGER = LogManager.getLogger(TestClassConstants.SEARCH_WEB_TEST);
 
     @DataProvider
     public static Object[][] queryText() {
@@ -43,8 +43,6 @@ public class SearchWebTest extends AbstractTest {
         WebDriver driver = getDriver();
         HomePage homePage = new HomePage(driver);
         homePage.open();
-
-        WebTestUtils.checkHomePageUrlAndTitle(homePage);
 
         HomeMasterHeader homeMasterHeader = homePage.getMasterHeader();
 
@@ -97,8 +95,6 @@ public class SearchWebTest extends AbstractTest {
         HomePage homePage = new HomePage(driver);
         homePage.open();
 
-        WebTestUtils.checkHomePageUrlAndTitle(homePage);
-
         HomeMasterHeader homeMasterHeader = homePage.getMasterHeader();
 
         homeMasterHeader.expandSearchInputBox();
@@ -109,15 +105,20 @@ public class SearchWebTest extends AbstractTest {
 
         // check if value attribute matches query text
         Assert.assertEquals(
-                headerSearchInputForm.getSearchInputValueAttributeString(),
+                headerSearchInputForm.getSearchInputValueAttrString(),
                 queryText,
-                "Search input value does not match expected input queryText"
+                String.format(
+                        "Search input value does not match expected input queryText -- actual: %s" +
+                                " ; expected: %s",
+                        headerSearchInputForm.getSearchInputValueAttrString(),
+                        queryText
+                )
         );
 
         // submit
         SearchResultsPage searchResultsPage = headerSearchInputForm.clickSearchSubmitButton();
 
-        String expectedSearchUrl =
+        final String EXPECTED_SEARCH_URL =
                 WebTestConstants.URL_SEARCH_RESULTS_PAGE_URL
                         + WebTestConstants.URL_QS_QUERY_PARAM
                         + queryText;
@@ -125,10 +126,11 @@ public class SearchWebTest extends AbstractTest {
         // check if url is as expected
         Assert.assertEquals(
                 searchResultsPage.getCurrentUrl(),
-                expectedSearchUrl,
+                EXPECTED_SEARCH_URL,
                 String.format(
                         "URLs do not match -- actual: %s ; expected: %s",
-                        searchResultsPage.getCurrentUrl(), expectedSearchUrl
+                        searchResultsPage.getCurrentUrl(),
+                        EXPECTED_SEARCH_URL
                 )
         );
 
@@ -137,13 +139,21 @@ public class SearchWebTest extends AbstractTest {
         Assert.assertEquals(
                 searchStatus.getSearchQueryTextString(),
                 queryText,
-                "The input query text does not match the value being used for the search results page."
+                String.format(
+                        "The input query text does not match the value being used for the search results"
+                                + " page -- actual: %s ; expected: %s",
+                        searchStatus.getSearchQueryTextString(),
+                        queryText
+                )
         );
 
         // validate that one or more results for query
         Assert.assertTrue(
                 searchStatus.getTotalResultsCount() > 0,
-                "There should be one or more search results."
+                String.format(
+                        "There should be one or more search results. Total results count: %s.",
+                        searchStatus.getTotalResultsCount()
+                )
         );
     }
 
@@ -156,8 +166,6 @@ public class SearchWebTest extends AbstractTest {
         HomePage homePage = new HomePage(driver);
         homePage.open();
 
-        WebTestUtils.checkHomePageUrlAndTitle(homePage);
-
         HomeMasterHeader homeMasterHeader = homePage.getMasterHeader();
 
         homeMasterHeader.expandSearchInputBox();
@@ -168,9 +176,14 @@ public class SearchWebTest extends AbstractTest {
 
         // check if value attribute matches query text
         Assert.assertEquals(
-                headerSearchInputForm.getSearchInputValueAttributeString(),
+                headerSearchInputForm.getSearchInputValueAttrString(),
                 absurdQueryText,
-                "Search input value does not match expected input queryText"
+                String.format(
+                        "Search input value does not match expected input queryText -- actual: %s" +
+                                " ; expected: %s",
+                        headerSearchInputForm.getSearchInputValueAttrString(),
+                        absurdQueryText
+                )
         );
 
         // submit
@@ -187,7 +200,8 @@ public class SearchWebTest extends AbstractTest {
                 expectedSearchUrl,
                 String.format(
                         "URLs do not match -- actual: %s ; expected: %s",
-                        searchResultsPage.getCurrentUrl(), expectedSearchUrl
+                        searchResultsPage.getCurrentUrl(),
+                        expectedSearchUrl
                 )
         );
 

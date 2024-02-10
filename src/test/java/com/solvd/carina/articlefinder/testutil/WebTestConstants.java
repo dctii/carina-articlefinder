@@ -4,8 +4,11 @@ import com.solvd.carina.articlefinder.util.ConfigConstants;
 import com.solvd.carina.articlefinder.util.QueryParametersConstants;
 import com.solvd.carina.articlefinder.util.StringConstants;
 import com.zebrunner.carina.utils.config.Configuration;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public final class WebTestConstants {
+    private static final Logger LOGGER = LogManager.getLogger(TestClassConstants.WEB_TEST_CONSTANTS);
     public WebTestConstants() {
     }
 

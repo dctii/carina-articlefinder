@@ -6,7 +6,9 @@ import org.apache.logging.log4j.Logger;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.List;
 import java.util.Locale;
+import java.util.stream.IntStream;
 
 public class DateTimeUtils {
     private static final Logger LOGGER = LogManager.getLogger(ClassConstants.DATE_TIME_UTILS);
@@ -60,6 +62,16 @@ public class DateTimeUtils {
         }
 
         return pubLocalDate;
+    }
+
+    public static boolean areDatesSortedByNewest(List<LocalDate> dates) {
+        return IntStream.range(0, dates.size() - 1)
+                .noneMatch(i -> dates.get(i).isBefore(dates.get(i + 1)));
+    }
+
+    public boolean areDatesSortedByOldest(List<LocalDate> dates) {
+        return IntStream.range(0, dates.size() - 1)
+                .noneMatch(i -> dates.get(i).isAfter(dates.get(i + 1)));
     }
 
 

@@ -72,6 +72,7 @@ public final class ClassConstants {
     public static final Class<ClassConstants> CLASS_CONSTANTS = ClassConstants.class;
     public static final Class<ConfigConstants> CONFIG_CONSTANTS = ConfigConstants.class;
     public static final Class<ConfigLoader> CONFIG_LOADER = ConfigLoader.class;
+    public static final Class<DateTimeConstants> DATE_TIME_CONSTANTS = DateTimeConstants.class;
     public static final Class<DateTimeUtils> DATE_TIME_UTILS = DateTimeUtils.class;
     public static final Class<ExceptionUtils> EXCEPTION_UTILS = ExceptionUtils.class;
     public static final Class<FacetConstants> FACET_CONSTANTS = FacetConstants.class;

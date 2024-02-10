@@ -1,8 +1,7 @@
 package com.solvd.carina.articlefinder;
 
-import com.solvd.carina.articlefinder.testutil.DriverUtils;
+import com.solvd.carina.articlefinder.testutil.TestClassConstants;
 import com.solvd.carina.articlefinder.testutil.WebTestConstants;
-import com.solvd.carina.articlefinder.testutil.WebTestUtils;
 import com.solvd.carina.articlefinder.util.ConfigConstants;
 import com.solvd.carina.articlefinder.web.HomePage;
 import com.solvd.carina.articlefinder.web.PostLoginSubscriptionOfferPage;
@@ -22,7 +21,7 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 public class LogInAndRegistrationTest extends AbstractTest {
-    private static final Logger LOGGER = LogManager.getLogger(LogInAndRegistrationTest.class);
+    private static final Logger LOGGER = LogManager.getLogger(TestClassConstants.LOG_IN_AND_REGISTRATION_TEST);
 
     @DataProvider
     public static Object[][] userCredentials() {
@@ -79,39 +78,36 @@ public class LogInAndRegistrationTest extends AbstractTest {
         HomePage homePage = new HomePage(driver);
         homePage.open();
 
-        WebTestUtils.checkHomePageUrlAndTitle(homePage);
+        /*
+            R.CONFIG.put("username", userEmail, true);
+            R.CONFIG.put("password", userPassword, true);
+        */
 
         HomeMasterHeader homeMasterHeader = homePage.getMasterHeader();
 
         // click the login button, taking you to the user access page for log in and registration
-        DriverUtils.implicitlyWait(driver, 3);
         UserAccessPage userAccessPage = homeMasterHeader.clickLogInButton();
 
-        // type user email for login handle
+        // type user email for login handle and submit with continue button
         EnterEmailForm enterEmailForm = userAccessPage.getEnterEmailForm();
-        DriverUtils.implicitlyWait(driver, 3);
         enterEmailForm.typeEmailInputValue(userEmail);
-
-        DriverUtils.implicitlyWait(driver, 4);
         enterEmailForm.clickContinueButton();
 
+        //
         LogInForm logInForm = userAccessPage.getLogInForm();
-        DriverUtils.implicitlyWait(driver, 5);
         logInForm.typePasswordInputValue(userPassword);
 
         // click on the continue without subscribing link on the subscription offer page
-        DriverUtils.implicitlyWait(driver, 3);
         PostLoginSubscriptionOfferPage postLoginPage = logInForm.clickSubmitButton();
-        DriverUtils.implicitlyWait(driver, 3);
         homePage = postLoginPage.clickContinueWithoutSubscribingLink();
         homeMasterHeader = homePage.getMasterHeader();
 
         Assert.assertEquals(
-                homeMasterHeader.getUserSettingsButton().getText(),
+                homeMasterHeader.getUserSettingsButtonText(),
                 WebTestConstants.EXPECTED_USER_SETTINGS_BUTTON_TEXT,
                 String.format(
                         "User settings button text does not match -- actual: %s ; expected %s",
-                        homeMasterHeader.getUserSettingsButton().getText(),
+                        homeMasterHeader.getUserSettingsButtonText(),
                         WebTestConstants.EXPECTED_USER_SETTINGS_BUTTON_TEXT
                 )
         );
@@ -123,12 +119,12 @@ public class LogInAndRegistrationTest extends AbstractTest {
         homeMasterHeader = homePage.getMasterHeader();
 
         Assert.assertFalse(
-                homeMasterHeader.getUserSettingsButton().isPresent(),
+                homeMasterHeader.isUserSettingsButtonPresent(),
                 "User settings button exists, meaning that user is not logged out"
         );
 
         Assert.assertTrue(
-                homeMasterHeader.getLogInButton().isPresent(),
+                homeMasterHeader.isLogInButtonPresent(),
                 "Log In button does not exist, meaning that user is not logged out"
         );
     }
@@ -142,8 +138,6 @@ public class LogInAndRegistrationTest extends AbstractTest {
         HomePage homePage = new HomePage(driver);
         homePage.open();
 
-        WebTestUtils.checkHomePageUrlAndTitle(homePage);
-
         HomeMasterHeader homeMasterHeader = homePage.getMasterHeader();
 
         // click the login button, taking you to the user access page for log in and registration
@@ -152,11 +146,10 @@ public class LogInAndRegistrationTest extends AbstractTest {
         // type user email for login handle
         EnterEmailForm enterEmailForm = userAccessPage.getEnterEmailForm();
         enterEmailForm.typeEmailInputValue(userEmail);
-
         enterEmailForm.clickContinueButton();
 
         Assert.assertTrue(
-                enterEmailForm.getErrorMessageSpan().isElementPresent(),
+                enterEmailForm.isInvalidEmailErrorMessagePresent(),
                 "Error message for email should be present since email is invalid"
         );
 
@@ -180,8 +173,6 @@ public class LogInAndRegistrationTest extends AbstractTest {
         HomePage homePage = new HomePage(driver);
         homePage.open();
 
-        WebTestUtils.checkHomePageUrlAndTitle(homePage);
-
         HomeMasterHeader homeMasterHeader = homePage.getMasterHeader();
 
         // click the login button, taking you to the user access page for log in and registration
@@ -190,7 +181,6 @@ public class LogInAndRegistrationTest extends AbstractTest {
         // type user email for login handle
         EnterEmailForm enterEmailForm = userAccessPage.getEnterEmailForm();
         enterEmailForm.typeEmailInputValue(userEmail);
-
         enterEmailForm.clickContinueButton();
 
         LogInForm logInForm = userAccessPage.getLogInForm();
@@ -198,16 +188,16 @@ public class LogInAndRegistrationTest extends AbstractTest {
         logInForm.clickSubmitButton();
 
         Assert.assertTrue(
-                logInForm.getEmailOrPasswordIncorrectMessageSpan().isElementPresent(),
+                logInForm.isWrongEmailOrPasswordMessagePresent(),
                 "Error message for invalid password is not present."
         );
 
         Assert.assertEquals(
-                logInForm.getEmailOrPasswordIncorrectMessageTextString(),
+                logInForm.getWrongEmailOrPasswordMessageTextString(),
                 WebTestConstants.EXPECTED_INVALID_LOGIN_ERROR_MSG,
                 String.format(
                         "Error message does not match -- actual: %s ; expected: %s",
-                        logInForm.getEmailOrPasswordIncorrectMessageTextString(),
+                        logInForm.getWrongEmailOrPasswordMessageTextString(),
                         WebTestConstants.EXPECTED_INVALID_LOGIN_ERROR_MSG
                 )
         );
@@ -222,8 +212,6 @@ public class LogInAndRegistrationTest extends AbstractTest {
         HomePage homePage = new HomePage(driver);
         homePage.open();
 
-        WebTestUtils.checkHomePageUrlAndTitle(homePage);
-
         HomeMasterHeader homeMasterHeader = homePage.getMasterHeader();
 
         // click the login button, taking you to the user access page for log in and registration
@@ -232,7 +220,6 @@ public class LogInAndRegistrationTest extends AbstractTest {
         // type user email for login handle
         EnterEmailForm enterEmailForm = userAccessPage.getEnterEmailForm();
         enterEmailForm.typeEmailInputValue(userEmail);
-
         enterEmailForm.clickContinueButton();
 
         RegisterForm registerForm = userAccessPage.getRegisterForm();
@@ -240,7 +227,7 @@ public class LogInAndRegistrationTest extends AbstractTest {
         registerForm.clickSubmitButton();
 
         Assert.assertTrue(
-                registerForm.getPasswordErrorMessageSpan().isElementPresent(),
+                registerForm.isPasswordErrorMessagePresent(),
                 "Error message for password being too short is not present."
         );
 
@@ -254,5 +241,4 @@ public class LogInAndRegistrationTest extends AbstractTest {
                 )
         );
     }
-
 }

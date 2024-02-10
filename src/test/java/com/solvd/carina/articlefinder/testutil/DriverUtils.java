@@ -21,7 +21,7 @@ import java.util.Set;
 import java.util.function.Function;
 
 public class DriverUtils {
-    private static final Logger LOGGER = LogManager.getLogger(DriverUtils.class);
+    private static final Logger LOGGER = LogManager.getLogger(TestClassConstants.DRIVER_UTILS);
 
     private DriverUtils() {
         ExceptionUtils.preventConstantsInstantiation();

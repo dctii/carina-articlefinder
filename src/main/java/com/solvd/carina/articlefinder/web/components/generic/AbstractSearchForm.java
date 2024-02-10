@@ -1,6 +1,6 @@
 package com.solvd.carina.articlefinder.web.components.generic;
 
-import com.solvd.carina.articlefinder.util.AttributeUtils;
+import com.solvd.carina.articlefinder.util.AttributeConstants;
 import com.solvd.carina.articlefinder.web.SearchResultsPage;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
 import com.zebrunner.carina.webdriver.gui.AbstractUIObject;
@@ -22,8 +22,35 @@ public abstract class AbstractSearchForm extends AbstractUIObject {
         super(driver, searchContext);
     }
 
+    /*
+        self
+     */
+
+    public ExtendedWebElement getSelf() {
+        return this.getRootExtendedElement();
+    }
+
+    public boolean isPresent(long timeout) {
+        return this.getSelf().isPresent(timeout);
+    }
+
+    public boolean isPresent() {
+        return this.isPresent(1);
+    }
+
+    /*
+        searchInputField
+    */
     public ExtendedWebElement getSearchInputField() {
         return searchInputField;
+    }
+
+    public boolean isSearchInputFieldPresent(long timeout) {
+        return searchInputField.isPresent(timeout);
+    }
+
+    public boolean isSearchInputFieldPresent() {
+        return this.isSearchInputFieldPresent(1);
     }
 
     public void typeSearchInputValue(String searchValue) {
@@ -31,18 +58,30 @@ public abstract class AbstractSearchForm extends AbstractUIObject {
         searchInputField.type(searchValue);
     }
 
-    public String getSearchInputValueAttributeString() {
+    public String getSearchInputValueAttrString() {
         // get the search input value
-        return AttributeUtils.getValueString(searchInputField);
+        return searchInputField.getAttribute(AttributeConstants.VALUE);
     }
+
+    /*
+        searchSubmitButton
+    */
+
 
     public ExtendedWebElement getSearchSubmitButton() {
         return searchSubmitButton;
     }
 
+    public boolean isSearchSubmitButtonPresent(long timeout) {
+        return searchSubmitButton.isPresent(timeout);
+    }
+
+    public boolean isSearchSubmitButtonPresent() {
+        return this.isSearchSubmitButtonPresent(1);
+    }
+
     public SearchResultsPage clickSearchSubmitButton() {
         searchSubmitButton.click();
-
         return new SearchResultsPage(getDriver());
     }
 }

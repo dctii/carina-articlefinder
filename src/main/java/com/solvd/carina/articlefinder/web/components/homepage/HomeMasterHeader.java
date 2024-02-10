@@ -1,22 +1,14 @@
 package com.solvd.carina.articlefinder.web.components.homepage;
 
-import com.solvd.carina.articlefinder.util.AnsiCodes;
-import com.solvd.carina.articlefinder.util.DateTimeConstants;
-import com.solvd.carina.articlefinder.util.StringConstants;
 import com.solvd.carina.articlefinder.web.HomePage;
-import com.solvd.carina.articlefinder.web.components.generic.Anchor;
 import com.solvd.carina.articlefinder.web.components.generic.MasterHeader;
+import com.solvd.carina.articlefinder.web.elements.Anchor;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
-
-import java.time.LocalDate;
-import java.time.ZonedDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.Locale;
 
 public class HomeMasterHeader extends MasterHeader {
     private static final Logger LOGGER = LogManager.getLogger(HomeMasterHeader.class);
@@ -42,8 +34,20 @@ public class HomeMasterHeader extends MasterHeader {
         super(driver, searchContext);
     }
 
+    /*
+        todayDateDisplay
+    */
+
     public ExtendedWebElement getTodayDateDisplay() {
         return todayDateDisplay;
+    }
+
+    public boolean isTodayDisplayPresent(long timeout) {
+        return todayDateDisplay.isPresent(timeout);
+    }
+
+    public boolean isTodayDisplayPresent() {
+        return this.isTodayDisplayPresent(1);
     }
 
     public boolean isTodayDateDisplayPresent(long timeout) {
@@ -58,25 +62,9 @@ public class HomeMasterHeader extends MasterHeader {
         return todayDateDisplay.getText();
     }
 
-    public boolean isTodayDateDisplayMatchingNewYorkLocalDate() {
-        String dateString = getTodayDateDisplayTextString(); // e.g., "Thursday, February 8, 2024"
-        DateTimeFormatter todayDateFormatter = DateTimeFormatter.ofPattern(
-                StringConstants.DOTW_MONTH_D_YYYY_DATE_PATTERN,
-                Locale.ENGLISH
-        );
-        LocalDate date = LocalDate.parse(dateString, todayDateFormatter);
-
-        // Get current date in New York timezone
-        ZonedDateTime currentDateInNewYork = ZonedDateTime.now(DateTimeConstants.AMERICA_NEW_YORK_ZID);
-        LocalDate currentDate = currentDateInNewYork.toLocalDate();
-
-        LOGGER.info("{}Today date display after converted: {}{}", AnsiCodes.RED_ON_YELLOW,
-                date.toString(),
-                AnsiCodes.RESET_ALL);
-        LOGGER.info("{}LocalDate.now() in New York: {}{}", AnsiCodes.RED_ON_YELLOW, currentDate.toString(), AnsiCodes.RESET_ALL);
-
-        return date.equals(currentDate);
-    }
+    /*
+        todayPaperLink
+    */
 
     public Anchor getTodayPaperLink() {
         return todayPaperLink;
@@ -87,7 +75,7 @@ public class HomeMasterHeader extends MasterHeader {
     }
 
     public boolean isTodayPaperLinkPresent() {
-        return isTodayPaperLinkPresent(1);
+        return this.isTodayPaperLinkPresent(1);
     }
 
 
@@ -101,6 +89,10 @@ public class HomeMasterHeader extends MasterHeader {
         return todayPaperLink.getText();
     }
 
+    /*
+        headerLogo
+    */
+
     public Anchor getHeaderLogo() {
         return headerLogo;
     }
@@ -110,9 +102,12 @@ public class HomeMasterHeader extends MasterHeader {
     }
 
     public boolean isHeaderLogoPresent() {
-        return isHeaderLogoPresent(1);
+        return this.isHeaderLogoPresent(1);
     }
 
+    public String getHeaderLogoHref() {
+        return headerLogo.getHref();
+    }
 
     public HomePage clickHeaderLogo() {
         headerLogo.click();

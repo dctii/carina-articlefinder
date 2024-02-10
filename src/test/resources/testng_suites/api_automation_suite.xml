@@ -7,6 +7,5 @@
             <class name="com.solvd.carina.articlefinder.ArticleSearchAPITest">
             </class>
         </classes>
-
     </test>
 </suite>

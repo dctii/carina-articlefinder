@@ -1,7 +1,9 @@
 package com.solvd.carina.articlefinder.web.components.loginregistrationpage;
 
-import com.solvd.carina.articlefinder.util.AttributeUtils;
+import com.solvd.carina.articlefinder.util.AttributeConstants;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
@@ -9,9 +11,7 @@ import org.openqa.selenium.support.FindBy;
 import java.util.List;
 
 public class EnterEmailForm extends AbstractLoginRegistrationForm {
-
-    @FindBy(xpath = ".")
-    private ExtendedWebElement self;
+    private static final Logger LOGGER = LogManager.getLogger(EnterEmailForm.class);
 
     @FindBy(xpath = ".//button[@type='submit' and @data-testid='submit-email']")
     private ExtendedWebElement continueButton;
@@ -19,30 +19,69 @@ public class EnterEmailForm extends AbstractLoginRegistrationForm {
     private List<SSOButton> ssoButtons;
 
     @FindBy(xpath = ".//fieldset[@type='email']/div[@data-testid='error-message']/span[@role='alert']")
-    private ExtendedWebElement errorMessageSpan;
+    private ExtendedWebElement invalidEmailErrorMessage;
+
+    private final String GOOGLE_DATA_PROVIDER_STRING = "google";
+    private final String FACEBOOK_DATA_PROVIDER_STRING = "facebook";
+    private final String APPLE_DATA_PROVIDER_STRING = "apple";
 
     public EnterEmailForm(WebDriver driver, SearchContext searchContext) {
         super(driver, searchContext);
     }
 
-    public ExtendedWebElement getSelf() {
-        return self;
+    public String getFormMethodString() {
+        return this.getSelf().getAttribute(AttributeConstants.METHOD);
     }
 
-    public String getFormMethodString() {
-        return AttributeUtils.getFormMethodString(self);
-    }
+    /*
+        continueButton
+    */
 
     public ExtendedWebElement getContinueButton() {
         return continueButton;
+    }
+
+    public boolean isContinueButtonPresent(long timeout) {
+        return continueButton.isPresent(timeout);
+    }
+
+    public boolean isContinueButtonPresent() {
+        return this.isContinueButtonPresent(1);
     }
 
     public void clickContinueButton() {
         continueButton.click();
     }
 
+    /*
+        ssoButtons
+    */
+
     public List<SSOButton> getSsoButtons() {
         return ssoButtons;
+    }
+
+    public boolean isSsoButtonPresent(String dataProvider) {
+        return ssoButtons.stream()
+                .filter(ssoButton ->
+                        ssoButton.getDataProviderString().equalsIgnoreCase(
+                                dataProvider)
+                )
+                .findFirst()
+                .map(SSOButton::isPresent)
+                .orElse(false);
+    }
+
+    public boolean isSsoAppleButtonPresent() {
+        return isSsoButtonPresent(APPLE_DATA_PROVIDER_STRING);
+    }
+
+    public boolean isSsoGoogleButtonPresent() {
+        return isSsoButtonPresent(GOOGLE_DATA_PROVIDER_STRING);
+    }
+
+    public boolean isSsoFacebookButtonPresent() {
+        return isSsoButtonPresent(FACEBOOK_DATA_PROVIDER_STRING);
     }
 
     public void clickSsoButtonByProvider(String dataProvider) {
@@ -52,32 +91,38 @@ public class EnterEmailForm extends AbstractLoginRegistrationForm {
                                 button.getDataProviderString()
                         ))
                 .findFirst()
-                .ifPresent(SSOButton::clickSelf);
+                .ifPresent(SSOButton::click);
     }
 
     public void clickGoogleSsoButton() {
-        final String dataProvider = "google";
-
-        clickSsoButtonByProvider(dataProvider);
+        clickSsoButtonByProvider(GOOGLE_DATA_PROVIDER_STRING);
     }
 
     public void clickFacebookSsoButton() {
-        final String dataProvider = "facebook";
-
-        clickSsoButtonByProvider(dataProvider);
+        clickSsoButtonByProvider(FACEBOOK_DATA_PROVIDER_STRING);
     }
 
     public void clickAppleSsoButton() {
-        final String dataProvider = "apple";
-
-        clickSsoButtonByProvider(dataProvider);
+        clickSsoButtonByProvider(APPLE_DATA_PROVIDER_STRING);
     }
 
-    public ExtendedWebElement getErrorMessageSpan() {
-        return errorMessageSpan;
+    /*
+        invalidEmailErrorMessage
+    */
+
+    public ExtendedWebElement getInvalidEmailErrorMessage() {
+        return invalidEmailErrorMessage;
+    }
+
+    public boolean isInvalidEmailErrorMessagePresent(long timeout) {
+        return invalidEmailErrorMessage.isPresent(timeout);
+    }
+
+    public boolean isInvalidEmailErrorMessagePresent() {
+        return this.isInvalidEmailErrorMessagePresent(1);
     }
 
     public String getErrorMessageTextString() {
-        return errorMessageSpan.getText();
+        return invalidEmailErrorMessage.getText();
     }
 }

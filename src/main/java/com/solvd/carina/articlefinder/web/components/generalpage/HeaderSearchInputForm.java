@@ -11,9 +11,6 @@ import org.openqa.selenium.support.FindBy;
 public class HeaderSearchInputForm extends AbstractSearchForm {
     private static final Logger LOGGER = LogManager.getLogger(HeaderSearchInputForm.class);
 
-    @FindBy(xpath = ".")
-    private ExtendedWebElement self;
-
     @FindBy(xpath = ".//input[@data-testid='search-reset' and @type='reset']")
     private ExtendedWebElement searchInputReset;
 
@@ -21,20 +18,33 @@ public class HeaderSearchInputForm extends AbstractSearchForm {
         super(driver, searchContext);
     }
 
-    public ExtendedWebElement getSelf() {
-        return self;
-    }
+    /*
+        searchInputReset
+     */
 
     public ExtendedWebElement getSearchInputReset() {
         return searchInputReset;
     }
 
-    public void clickSearchInputReset() {
-        searchInputReset.clickIfPresent(10);
+    public boolean isSearchInputResetIsPresent(long timeout) {
+        return searchInputReset.isPresent();
     }
 
-    public void resetSearchInput() {
-        // reset search input box
-        clickSearchInputReset();
+    public boolean isSearchInputResetIsPresent() {
+        return isSearchInputResetIsPresent(1);
+    }
+
+    public void clickSearchInputReset() {
+        searchInputReset.click();
+    }
+
+    public void clickSearchInputResetIfPresent(long timeout) {
+        // not present if not expanded
+        searchInputReset.clickIfPresent(timeout);
+    }
+
+    public void clickSearchInputResetIfPresent() {
+        // not present if not expanded
+        clickSearchInputResetIfPresent(1);
     }
 }
