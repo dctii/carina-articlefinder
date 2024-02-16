@@ -2,13 +2,15 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="WebAutomation" verbose="1" parallel="tests" thread-count="10">
     <!--   Web UI Tests     -->
-    <test name="NY Times UI Automation Tests">
+    <test name="NY Times UI Automation Tests" thread-count="5">
         <classes>
             <class name="com.solvd.carina.articlefinder.HomePageWebTest">
             </class>
             <class name="com.solvd.carina.articlefinder.SearchWebTest">
             </class>
             <class name="com.solvd.carina.articlefinder.LogInAndRegistrationTest">
+            </class>
+            <class name="com.solvd.carina.articlefinder.NewUITests">
             </class>
         </classes>
     </test>
