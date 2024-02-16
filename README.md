@@ -88,6 +88,7 @@ nytimes_user_email=nytimesdotcomemailhandle
 nytimes_user_pw=nytimesdotcompassword
 
 PROD.nytimes_home_url=https://www.nytimes.com
+PROD.adidas_sneakers_lp_url=https://www.adidas.com/us/men-athletic_sneakers
 
 
 ```
