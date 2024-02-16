@@ -16,7 +16,7 @@ public class GeneralMasterHeader extends MasterHeader {
     @FindBy(xpath = ".//a[@data-testid='masthead-mobile-logo']/child::*[contains(class, @viewbox)]")
     private ExtendedWebElement headerLogo; // svg logo
 
-    @FindBy(xpath = ".//a[@data-testid='masthead-section-label']")
+    @FindBy(xpath = ".//a[@data-testid='masthead-section-label'] | //div[@id='masthead-section-label']/a")
     private Anchor sectionLabel;
 
     public GeneralMasterHeader(WebDriver driver, SearchContext searchContext) {

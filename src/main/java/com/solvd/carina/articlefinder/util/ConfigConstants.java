@@ -18,6 +18,7 @@ public final class ConfigConstants {
     public static final String NYT_USER_PW_KEY = "nytimes_user_pw";
     public static final String BROWSER_KEY = "browser";
     public static final String SELENIUM_URL = "selenium_url";
+    public static final String ADIDAS_SNEAKERS_LISTING_PAGE_URL_KEY = "adidas_sneakers_lp_url";
 
 
     private ConfigConstants() {

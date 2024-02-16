@@ -31,5 +31,4 @@ public abstract class GeneralPage extends PageContainer {
     public boolean isMasterHeaderPresent() {
         return this.isMasterHeaderPresent(1);
     }
-
 }

@@ -15,6 +15,8 @@ public class RegExpConstants {
     public static final String NUMBERS_WITH_COMMAS = "(\\d+[\\,\\d+]*)";
 
     public static final String WHITESPACE = "\\s+";
+    public static final String COMMA_AND_MAYBE_POST_WHITESPACE = ",\\s*";
+    public static final String SEMICOLON_AND_MAYBE_POST_WHITESPACE = ";\\s*";
 
 
     private RegExpConstants() {

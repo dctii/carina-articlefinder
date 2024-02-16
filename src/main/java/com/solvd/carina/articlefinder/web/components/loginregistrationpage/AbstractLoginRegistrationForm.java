@@ -1,26 +1,31 @@
 package com.solvd.carina.articlefinder.web.components.loginregistrationpage;
 
-import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
-import com.zebrunner.carina.webdriver.gui.AbstractUIObject;
+import com.solvd.carina.articlefinder.util.AttributeConstants;
+import com.solvd.carina.articlefinder.web.components.generic.AbstractGlobalUIObject;
+import com.solvd.carina.articlefinder.web.elements.BoringElement;
+import com.solvd.carina.articlefinder.web.elements.Input;
+import com.solvd.carina.articlefinder.web.elements.Label;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 
-public abstract class AbstractLoginRegistrationForm extends AbstractUIObject {
+public abstract class AbstractLoginRegistrationForm extends AbstractGlobalUIObject {
     private static final Logger LOGGER = LogManager.getLogger(AbstractLoginRegistrationForm.class);
 
-    @FindBy(xpath = ".//label[@for='email']")
-    private ExtendedWebElement emailAddressInputLabel;
-    @FindBy(xpath = ".//input[@type='email']")
-    private ExtendedWebElement emailInputField;
+    @FindBy(xpath = "//form[@name='Lire-UI-Form']//h2[contains(text(), 'og in')]")
+    private BoringElement formHeader;
+    @FindBy(xpath = "//form[@name='Lire-UI-Form']//h2[contains(text(), 'og in')]//following-sibling::h2")
+    private BoringElement formSubHeader;
+    @FindBy(xpath = "//label[@for='email']")
+    private Label emailAddressInputLabel;
+    @FindBy(xpath = "//input[@type='email']")
+    private Input emailInputField;
 
     @FindBy(xpath = ".//input[@type='password']")
-    private ExtendedWebElement passwordInputField;
+    private Input passwordInputField;
 
-    @FindBy(xpath = "//form[@name='Lire-UI-Form']//h2")
-    private ExtendedWebElement formHeader;
 
     public AbstractLoginRegistrationForm(WebDriver driver, SearchContext searchContext) {
         super(driver, searchContext);
@@ -30,23 +35,15 @@ public abstract class AbstractLoginRegistrationForm extends AbstractUIObject {
         self
      */
 
-    public ExtendedWebElement getSelf() {
-        return this.getRootExtendedElement();
-    }
-
-    public boolean isPresent(long timeout) {
-        return this.getSelf().isPresent(timeout);
-    }
-
-    public boolean isPresent() {
-        return this.isPresent(1);
+    public String getFormMethodString() {
+        return this.getSelf().getAttribute(AttributeConstants.METHOD);
     }
 
     /*
         emailAddressInputLabel
     */
 
-    public ExtendedWebElement getEmailAddressInputLabel() {
+    public Label getEmailAddressInputLabel() {
         return emailAddressInputLabel;
     }
 
@@ -66,7 +63,7 @@ public abstract class AbstractLoginRegistrationForm extends AbstractUIObject {
         emailInputField
     */
 
-    public ExtendedWebElement getEmailInputField() {
+    public Input getEmailInputField() {
         return emailInputField;
     }
 
@@ -86,7 +83,7 @@ public abstract class AbstractLoginRegistrationForm extends AbstractUIObject {
     /*
         passwordInputField
     */
-    public ExtendedWebElement getPasswordInputField() {
+    public Input getPasswordInputField() {
         return passwordInputField;
     }
 
@@ -107,7 +104,7 @@ public abstract class AbstractLoginRegistrationForm extends AbstractUIObject {
         formHeader
     */
 
-    public ExtendedWebElement getFormHeader() {
+    public BoringElement getFormHeader() {
         return formHeader;
     }
 
@@ -123,5 +120,23 @@ public abstract class AbstractLoginRegistrationForm extends AbstractUIObject {
         return formHeader.getText();
     }
 
+    /*
+        formSubHeader
+    */
 
+    public BoringElement getFormSubHeader() {
+        return formSubHeader;
+    }
+
+    public boolean isFormSubHeaderPresent(long timeout) {
+        return formHeader.isPresent(timeout);
+    }
+
+    public boolean isFormSubHeaderPresent() {
+        return this.isFormSubHeaderPresent(1);
+    }
+
+    public String getFormSubHeaderTextString() {
+        return formSubHeader.getText();
+    }
 }

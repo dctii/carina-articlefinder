@@ -193,7 +193,8 @@ public class BooleanUtils {
     }
 
     public static boolean allArticlesHaveMainHeadline(String headline, ArticleSearchResponse response) {
-        boolean articlesFound = response.getResponse().getDocs().stream()
+        // true if all articles found
+        return response.getResponse().getDocs().stream()
                 .allMatch(
                         article ->
                                 headline.replace(
@@ -201,6 +202,5 @@ public class BooleanUtils {
                                         StringConstants.EMPTY_STRING
                                 ).equals(article.getHeadline().getMain())
                 );
-        return articlesFound;
     }
 }

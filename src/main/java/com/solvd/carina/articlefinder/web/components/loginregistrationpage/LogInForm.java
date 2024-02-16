@@ -1,6 +1,8 @@
 package com.solvd.carina.articlefinder.web.components.loginregistrationpage;
 
 import com.solvd.carina.articlefinder.web.elements.Anchor;
+import com.solvd.carina.articlefinder.web.elements.BoringElement;
+import com.solvd.carina.articlefinder.web.elements.Button;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -15,10 +17,10 @@ public class LogInForm extends AbstractPasswordEnabledForm {
     private Anchor forgotYourPasswordLink;
 
     @FindBy(xpath = ".//button[contains(text(), 'without password')]")
-    private ExtendedWebElement logInWithoutPasswordButton;
+    private Button logInWithoutPasswordButton;
 
     @FindBy(xpath = ".//div[@data-testid='api-error']/span[@role='alert']")
-    private ExtendedWebElement wrongEmailOrPasswordMessage;
+    private BoringElement wrongEmailOrPasswordMessage;
 
 
     public LogInForm(WebDriver driver, SearchContext searchContext) {

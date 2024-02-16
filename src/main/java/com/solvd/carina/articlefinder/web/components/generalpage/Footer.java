@@ -1,39 +1,54 @@
 package com.solvd.carina.articlefinder.web.components.generalpage;
 
-import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
-import com.zebrunner.carina.webdriver.gui.AbstractUIObject;
+import com.solvd.carina.articlefinder.web.components.generic.AbstractGlobalUIObject;
+import com.solvd.carina.articlefinder.web.elements.Anchor;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.FindBy;
 
-public class Footer extends AbstractUIObject {
+public class Footer extends AbstractGlobalUIObject {
     private static final Logger LOGGER = LogManager.getLogger(Footer.class);
 
-    /* TODO: links by text
-        // ul/li copyright copyrightLink
-        // ul/li legalese, collaboration & contact not(contains(@class, 'mobileOnly'))
-        // ul/li privacy & california notices
-    */
+    // non-mobile footer links
+    @FindBy(
+            xpath = ".//li[not(contains(@class, 'mobileOnly'))]"
+                    + "/a[translate(text(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz') = '%s']"
+    )
+    Anchor footerLink;
+
+    private static final String CALIFORNIA_NOTICES_LINK_TEXT = "California Notices";
+
     public Footer(WebDriver driver, SearchContext searchContext) {
         super(driver, searchContext);
     }
 
     /*
-        self
+        footer link
      */
 
-    public ExtendedWebElement getSelf() {
-        return this.getRootExtendedElement();
+    public Anchor getFooterLink() {
+        return footerLink;
     }
 
-    public boolean isPresent(long timeout) {
-        return this.getSelf().isPresent(timeout);
+    public Anchor getFooterLink(String text) {
+        return (Anchor) footerLink.format(text.toLowerCase());
     }
 
-    public boolean isPresent() {
-        return this.isPresent(1);
+    public boolean isFooterLinkPresent(String text, long timeout) {
+        return getFooterLink(text).isPresent(timeout);
     }
 
+    public boolean isFooterLinkPresent(String text) {
+        return getFooterLink(text).isPresent(1);
+    }
 
+    public String getFooterLinkHrefVal(String text) {
+        return getFooterLink(text).getHref();
+    }
+
+    public void clickFooterLink(String text) {
+        getFooterLink(text).click();
+    }
 }

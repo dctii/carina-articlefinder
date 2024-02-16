@@ -1,7 +1,8 @@
 package com.solvd.carina.articlefinder.web.components.loginregistrationpage;
 
-import com.solvd.carina.articlefinder.util.AttributeConstants;
 import com.solvd.carina.articlefinder.web.PostLoginSubscriptionOfferPage;
+import com.solvd.carina.articlefinder.web.elements.Button;
+import com.solvd.carina.articlefinder.web.elements.Label;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -12,24 +13,16 @@ import org.openqa.selenium.support.FindBy;
 public abstract class AbstractPasswordEnabledForm extends AbstractLoginRegistrationForm {
     private static final Logger LOGGER = LogManager.getLogger(AbstractPasswordEnabledForm.class);
     @FindBy(xpath = ".//button[@data-testid='edit-email']")
-    private ExtendedWebElement editEmailButton;
+    private Button editEmailButton;
     @FindBy(xpath = ".//label[@for='password']")
-    private ExtendedWebElement passwordInputLabel;
+    private Label passwordInputLabel;
     @FindBy(xpath = ".//button[@data-testid='show-password']")
-    private ExtendedWebElement showPasswordButton;
+    private Button showPasswordButton;
     @FindBy(xpath = ".//button[@type='submit']")
-    private ExtendedWebElement submitButton;
+    private Button submitButton;
 
     public AbstractPasswordEnabledForm(WebDriver driver, SearchContext searchContext) {
         super(driver, searchContext);
-    }
-
-    /*
-        self
-    */
-
-    public String getFormMethodString() {
-        return this.getSelf().getAttribute(AttributeConstants.METHOD);
     }
 
     /*

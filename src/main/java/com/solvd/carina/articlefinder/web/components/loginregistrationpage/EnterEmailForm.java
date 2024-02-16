@@ -1,6 +1,7 @@
 package com.solvd.carina.articlefinder.web.components.loginregistrationpage;
 
-import com.solvd.carina.articlefinder.util.AttributeConstants;
+import com.solvd.carina.articlefinder.web.elements.BoringElement;
+import com.solvd.carina.articlefinder.web.elements.Button;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -14,12 +15,12 @@ public class EnterEmailForm extends AbstractLoginRegistrationForm {
     private static final Logger LOGGER = LogManager.getLogger(EnterEmailForm.class);
 
     @FindBy(xpath = ".//button[@type='submit' and @data-testid='submit-email']")
-    private ExtendedWebElement continueButton;
+    private Button continueButton;
     @FindBy(xpath = ".//div[contains(@class, 'ButtonsMainContainer')]//button")
     private List<SSOButton> ssoButtons;
 
     @FindBy(xpath = ".//fieldset[@type='email']/div[@data-testid='error-message']/span[@role='alert']")
-    private ExtendedWebElement invalidEmailErrorMessage;
+    private BoringElement invalidEmailErrorMessage;
 
     private final String GOOGLE_DATA_PROVIDER_STRING = "google";
     private final String FACEBOOK_DATA_PROVIDER_STRING = "facebook";
@@ -27,10 +28,6 @@ public class EnterEmailForm extends AbstractLoginRegistrationForm {
 
     public EnterEmailForm(WebDriver driver, SearchContext searchContext) {
         super(driver, searchContext);
-    }
-
-    public String getFormMethodString() {
-        return this.getSelf().getAttribute(AttributeConstants.METHOD);
     }
 
     /*

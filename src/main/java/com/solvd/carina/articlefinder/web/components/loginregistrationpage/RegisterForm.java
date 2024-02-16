@@ -1,6 +1,8 @@
 package com.solvd.carina.articlefinder.web.components.loginregistrationpage;
 
+import com.solvd.carina.articlefinder.util.ElementUtils;
 import com.solvd.carina.articlefinder.web.elements.Anchor;
+import com.solvd.carina.articlefinder.web.elements.BoringElement;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -14,12 +16,12 @@ public class RegisterForm extends AbstractPasswordEnabledForm {
     private static final Logger LOGGER = LogManager.getLogger(RegisterForm.class);
 
     @FindBy(xpath = "//div[contains(@class, 'DefaultLegaleseLinks')]/span")
-    private ExtendedWebElement accountCreationLegalNotice;
+    private BoringElement accountCreationLegalNotice;
     @FindBy(xpath = "//div[contains(@class, 'DefaultLegaleseLinks')]/span/a")
     private List<Anchor> defaultLegaleseLinks;
 
     @FindBy(xpath = "//fieldset[@type='password']//div[@data-testid='error-message']/span[@role='alert']")
-    private ExtendedWebElement passwordErrorMessage;
+    private BoringElement passwordErrorMessage;
 
     private final String LEGALESE_LINK_TEXT_TERMS_OF_SALE = "Terms of Sale";
     private final String LEGALESE_LINK_TEXT_TERMS_OF_SERVICE = "Terms of Service";
@@ -58,13 +60,10 @@ public class RegisterForm extends AbstractPasswordEnabledForm {
     }
 
     public boolean isLegaliseLinkPresent(String legaleseLinkText) {
-        return defaultLegaleseLinks.stream()
-                .filter(legaleseLink ->
-                        legaleseLink.getText().equalsIgnoreCase(legaleseLinkText)
-                )
-                .findFirst()
-                .map(Anchor::isPresent)
-                .orElse(false);
+        return ElementUtils.isListElementWithTextPresent(
+                defaultLegaleseLinks,
+                legaleseLinkText
+        );
     }
 
     public boolean isTermsOfSaleLinkPresent() {
@@ -81,10 +80,10 @@ public class RegisterForm extends AbstractPasswordEnabledForm {
 
 
     public void clickLegaleseLinkByText(String legaleseLinkText) {
-        defaultLegaleseLinks.stream()
-                .filter(anchor -> anchor.getText().equals(legaleseLinkText))
-                .findFirst()
-                .ifPresent(Anchor::click);
+        ElementUtils.clickListElementWithText(
+                defaultLegaleseLinks,
+                legaleseLinkText
+        );
     }
 
     public void clickTermsOfSaleLink() {

@@ -22,7 +22,6 @@ public final class TestClassConstants {
     public static final Class<SearchWebTest> SEARCH_WEB_TEST = SearchWebTest.class;
 
     // com.solvd.carina.articlefinder.testutil
-    public static final Class<DriverUtils> DRIVER_UTILS = DriverUtils.class;
 
     public static final Class<TestClassConstants> TEST_CLASS_CONSTANTS = TestClassConstants.class;
     public static final Class<TestUtils> TEST_UTILS = TestUtils.class;

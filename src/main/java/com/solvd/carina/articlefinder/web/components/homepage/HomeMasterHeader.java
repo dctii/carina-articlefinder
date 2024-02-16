@@ -3,6 +3,7 @@ package com.solvd.carina.articlefinder.web.components.homepage;
 import com.solvd.carina.articlefinder.web.HomePage;
 import com.solvd.carina.articlefinder.web.components.generic.MasterHeader;
 import com.solvd.carina.articlefinder.web.elements.Anchor;
+import com.solvd.carina.articlefinder.web.elements.BoringElement;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -14,7 +15,7 @@ public class HomeMasterHeader extends MasterHeader {
     private static final Logger LOGGER = LogManager.getLogger(HomeMasterHeader.class);
 
     @FindBy(xpath = ".//span[@data-testid='todays-date']")
-    private ExtendedWebElement todayDateDisplay;
+    private BoringElement todayDateDisplay;
 
     @FindBy(xpath = ".//a[text()='Today’s Paper']")
     private Anchor todayPaperLink;

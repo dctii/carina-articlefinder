@@ -26,6 +26,8 @@ public final class StringConstants {
     public static final String ESCAPE_SEQUENCE = "\033";
     public static final String CARRIAGE_RETURN = "\r";
     public static final String NEWLINE = "\n";
+    public static final String LOWER_CASE_TRUE = "true";
+    public static final String LOWER_CASE_FALSE = "false";
     public static final String EQUALS_OPERATOR = "=";
     public static final String PADDED_EQUALS_OPERATOR = StringFormatters.nestInChars(
             SINGLE_WHITESPACE,

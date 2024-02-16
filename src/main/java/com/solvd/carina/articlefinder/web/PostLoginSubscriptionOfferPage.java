@@ -1,6 +1,7 @@
 package com.solvd.carina.articlefinder.web;
 
 import com.solvd.carina.articlefinder.web.elements.Anchor;
+import com.solvd.carina.articlefinder.web.elements.BoringElement;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
 import com.zebrunner.carina.webdriver.gui.AbstractPage;
 import org.apache.logging.log4j.LogManager;
@@ -12,7 +13,7 @@ public class PostLoginSubscriptionOfferPage extends AbstractPage {
     private static final Logger LOGGER = LogManager.getLogger(PostLoginSubscriptionOfferPage.class);
 
     @FindBy(xpath = "//h1")
-    private ExtendedWebElement headerOneText;
+    private BoringElement headerOneText;
 
     @FindBy(xpath = "//a[contains(text(), 'Continue without subscribing')]")
     private Anchor continueWithoutSubscribingLink;

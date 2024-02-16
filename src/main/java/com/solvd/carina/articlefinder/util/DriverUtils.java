@@ -1,9 +1,8 @@
-package com.solvd.carina.articlefinder.testutil;
+package com.solvd.carina.articlefinder.util;
 
-import com.solvd.carina.articlefinder.util.ActionUtils;
-import com.solvd.carina.articlefinder.util.AnsiCodes;
-import com.solvd.carina.articlefinder.util.ExceptionUtils;
-import com.solvd.carina.articlefinder.util.OperatingSystem;
+import com.solvd.carina.articlefinder.web.components.generic.AbstractGlobalUIObject;
+import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
+import com.zebrunner.carina.webdriver.gui.AbstractUIObject;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.Cookie;
@@ -21,7 +20,7 @@ import java.util.Set;
 import java.util.function.Function;
 
 public class DriverUtils {
-    private static final Logger LOGGER = LogManager.getLogger(TestClassConstants.DRIVER_UTILS);
+    private static final Logger LOGGER = LogManager.getLogger(DriverUtils.class);
 
     private DriverUtils() {
         ExceptionUtils.preventConstantsInstantiation();
@@ -31,38 +30,32 @@ public class DriverUtils {
         navigate() actions
     */
 
-    public static String navTo(WebDriver driver, String url) {
+    public static void navTo(WebDriver driver, String url) {
         driver.navigate().to(url);
-        return driver.getCurrentUrl();
     }
 
-    public static String navBack(WebDriver driver) {
+    public static void navTo(WebDriver driver, URL url) {
+        driver.navigate().to(url);
+    }
+
+    public static void navBack(WebDriver driver) {
         driver.navigate().back();
-        return driver.getCurrentUrl();
     }
 
-    public static String navForward(WebDriver driver) {
+    public static void navForward(WebDriver driver) {
         driver.navigate().forward();
-        return driver.getCurrentUrl();
     }
 
-    public static String navTo(WebDriver driver, URL url) {
-        driver.navigate().to(url);
-        return driver.getCurrentUrl();
-    }
-
-    public static String refreshPage(WebDriver driver) {
+    public static void refreshPage(WebDriver driver) {
         driver.navigate().refresh();
-        return driver.getCurrentUrl();
     }
 
-    public static String goToUrl(WebDriver driver, String url) {
+    public static void goToUrl(WebDriver driver, String url) {
         driver.get(url);
-        return driver.getCurrentUrl();
     }
 
-    public static String goToUrl(WebDriver driver, URL url) {
-        return goToUrl(driver, url.toString());
+    public static void goToUrl(WebDriver driver, URL url) {
+        goToUrl(driver, url.toString());
     }
 
     /*
@@ -70,6 +63,22 @@ public class DriverUtils {
     */
     public static void switchToFrame(WebDriver driver, String frameId) {
         driver.switchTo().frame(frameId);
+    }
+
+    public static void switchToFrame(WebDriver driver, WebElement frame) {
+        driver.switchTo().frame(frame);
+    }
+
+    public static void switchToFrame(WebDriver driver, ExtendedWebElement frame) {
+        switchToFrame(driver, frame.getElement());
+    }
+
+    public static void switchToFrame(WebDriver driver, AbstractGlobalUIObject frame) {
+        switchToFrame(driver, frame.getSelf());
+    }
+
+    public static void switchToFrame(WebDriver driver, AbstractUIObject frame) {
+        switchToFrame(driver, frame.getRootExtendedElement());
     }
 
     public static void switchToParentFrame(WebDriver driver) {
@@ -340,18 +349,5 @@ public class DriverUtils {
                 Duration.ofMillis(pollingIntervalMillis),
                 condition
         );
-    }
-
-    public static void implicitlyWait(WebDriver driver, long timeoutSeconds) {
-        implicitlyWait(
-                driver,
-                Duration.ofSeconds(timeoutSeconds)
-        );
-    }
-
-    public static void implicitlyWait(WebDriver driver, Duration timeoutDuration) {
-        driver.manage()
-                .timeouts()
-                .implicitlyWait(timeoutDuration);
     }
 }

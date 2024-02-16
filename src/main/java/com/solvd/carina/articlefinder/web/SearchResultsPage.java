@@ -2,6 +2,8 @@ package com.solvd.carina.articlefinder.web;
 
 import com.solvd.carina.articlefinder.web.components.searchpage.SearchPageSearchForm;
 import com.solvd.carina.articlefinder.web.components.searchpage.SearchResultItem;
+import com.solvd.carina.articlefinder.web.elements.Anchor;
+import com.solvd.carina.articlefinder.web.elements.Button;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -18,11 +20,14 @@ public class SearchResultsPage extends GeneralPage {
     @FindBy(xpath = ".//div[@data-testid='search-form']")
     private SearchPageSearchForm searchForm;
 
+    @FindBy(xpath = ".//ol[@id='searchSuggestions']/li[@data-testid='search-suggestion']/a[@role='link']")
+    private List<Anchor> searchSuggestions;
+
     @FindBy(xpath = "//ol[@data-testid='search-results']/li[@data-testid='search-bodega-result']")
     private List<SearchResultItem> searchResultItems;
 
     @FindBy(xpath = ".//button[@data-testid='search-show-more-button']")
-    private ExtendedWebElement showMoreButton;
+    private Button showMoreButton;
 
     /* TODO:
         SearchPageResultsFilterMenu
@@ -49,6 +54,40 @@ public class SearchResultsPage extends GeneralPage {
     }
 
     /*
+        searchSuggestions
+    */
+
+    public List<Anchor> getSearchSuggestions() {
+        return searchSuggestions;
+    }
+
+    public Anchor getSearchSuggestionByIndex(int index) {
+        return searchSuggestions.get(index);
+    }
+
+    public List<Anchor> getSearchSuggestionsWithQueryText(String queryText) {
+        return searchSuggestions.stream()
+                .filter(item -> item.getText().contains(queryText))
+                .collect(Collectors.toList());
+    }
+
+    public boolean anySuggestionsWithQueryText(String queryText) {
+        return !getSearchSuggestionsWithQueryText(queryText).isEmpty();
+    }
+
+    public boolean allSuggestionsHaveQueryText(String queryText) {
+        return searchSuggestions.stream()
+                .allMatch(
+                        suggestion ->
+                                suggestion.getText().contains(queryText)
+                );
+    }
+
+    public boolean isSuggestionByIndexPresent(int index, long timeout) {
+        return searchSuggestions.get(index).isPresent(timeout);
+    }
+
+    /*
         searchResultItems
     */
 
@@ -58,7 +97,7 @@ public class SearchResultsPage extends GeneralPage {
 
     public List<SearchResultItem> getResultsByTitleSubstring(String substring) {
         return searchResultItems.stream()
-                .filter(item -> item.getArticleTitleTextString().contains(substring))
+                .filter(item -> item.getArticleHeadlineTextString().contains(substring))
                 .collect(Collectors.toList());
     }
 
@@ -68,11 +107,11 @@ public class SearchResultsPage extends GeneralPage {
                 .collect(Collectors.toList());
     }
 
-    public boolean anyResultsWithTitleSubstring(String substring) {
+    public boolean anyResultsWithTitleSubstringExists(String substring) {
         return !getResultsByTitleSubstring(substring).isEmpty();
     }
 
-    public boolean anyResultsWithDescriptionSubstring(String substring) {
+    public boolean anyResultsWithDescriptionSubstringExists(String substring) {
         return !getResultsByDescriptionSubstring(substring).isEmpty();
     }
 
@@ -81,7 +120,7 @@ public class SearchResultsPage extends GeneralPage {
 
         if (index >= 0 && index < searchResultItems.size()) {
             SearchResultItem item = searchResultItems.get(index);
-            isPresent = item != null && item.isArticleTitlePresent();
+            isPresent = item != null && item.isArticleHeadlinePresent();
         }
 
         return isPresent;

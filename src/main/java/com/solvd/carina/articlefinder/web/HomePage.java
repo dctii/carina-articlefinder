@@ -32,8 +32,8 @@ public class HomePage extends PageContainer {
     }
 
     /*
-        masterHeader
-    */
+            masterHeader
+        */
     public HomeMasterHeader getMasterHeader() {
         return masterHeader;
     }

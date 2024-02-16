@@ -1,6 +1,7 @@
 package com.solvd.carina.articlefinder.web.components.searchpage;
 
 import com.solvd.carina.articlefinder.web.components.generic.AbstractSearchForm;
+import com.solvd.carina.articlefinder.web.elements.BoringElement;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -15,7 +16,7 @@ public class SearchPageSearchForm extends AbstractSearchForm {
     private SearchPageSearchStatus searchResultsStatus;
 
     @FindBy(xpath = ".//select[@data-testid='SearchForm-sortBy']")
-    private ExtendedWebElement sortByDropdown;
+    private BoringElement sortByDropdown;
 
     /* TODO:
         @FindBy(xpath = ".//div[@role='form' and @aria-label='Date Range']/parent::div/parent::div/parent::div")
